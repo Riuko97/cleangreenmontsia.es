@@ -8,10 +8,11 @@ export const negocio = {
   lema: 'Seriedad, limpieza y buen trabajo.',
   descripcion:
     'Limpieza de casas y pisos, jardinería, desbroce de parcelas, mantenimiento y cuidado de segundas residencias en Amposta, Alcanar, Sant Carles de la Ràpita y alrededores.',
-  // PENDIENTE DE CONFIRMAR por el propietario (ver README).
-  telefono: '+34681875173',
-  telefonoVisible: '681 87 51 73',
-  whatsapp: '34681875173',
+  // Número FICTICIO provisional (el mismo que la web de CleanGreen): cámbialo
+  // por el real antes de dar la web a conocer (ver README).
+  telefono: '+34600123456',
+  telefonoVisible: '600 12 34 56',
+  whatsapp: '34600123456',
   comarca: 'Montsià',
   zonasPrincipales: ['Amposta', 'Alcanar', 'Sant Carles de la Ràpita'],
   // Dominio previsto. Mientras no esté comprado, la web se publica en GitHub Pages

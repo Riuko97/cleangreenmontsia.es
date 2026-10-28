@@ -76,7 +76,7 @@ La web se publica sola con GitHub Actions (`.github/workflows/publicar.yml`) cad
 
 ## Pendiente por tu parte
 
-1. **Confirmar el teléfono.** La web usa el **681 87 51 73** para llamadas y WhatsApp. Si no es el del negocio, cámbialo en `src/modelo/negocio.js` (`telefono`, `telefonoVisible` y `whatsapp`).
+1. **Poner el teléfono real.** La web usa de momento un número **ficticio**, el **600 12 34 56**, para llamadas y WhatsApp. Antes de darla a conocer, cámbialo por el del negocio en `src/modelo/negocio.js` (`telefono`, `telefonoVisible` y `whatsapp`); se actualiza solo en todas las páginas.
 2. **Rellenar los datos legales.** En el aviso legal y en la política de privacidad hay huecos marcados en amarillo: nombre y apellidos o razón social, NIF, dirección completa y correo de contacto. La ley (LSSI-CE) obliga a publicarlos. Están en `src/modelo/legal.js`.
 3. **Comprar el dominio** `cleangreenmontsia.es`. Mira [docs/dominio.md](docs/dominio.md).
 4. **Revisar los textos.** No se ha inventado ningún dato del negocio: ni opiniones, ni años de experiencia, ni precios, ni plazos. Aun así, comprueba que los servicios y las frases describen cómo trabajas de verdad.
