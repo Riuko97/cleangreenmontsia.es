@@ -81,12 +81,12 @@ La web se publica sola con GitHub Actions (`.github/workflows/publicar.yml`) cad
 2. **Rellenar los datos legales.** En el aviso legal y en la política de privacidad hay huecos marcados en amarillo: nombre y apellidos o razón social, NIF, dirección completa y correo de contacto. La ley (LSSI-CE) obliga a publicarlos. Están en `src/modelo/legal.js`.
 3. **Comprar el dominio** `cleangreenmontsia.es`. Mira [docs/dominio.md](docs/dominio.md).
 4. **Revisar los textos.** No se ha inventado ningún dato del negocio: ni opiniones, ni años de experiencia, ni precios, ni plazos. Aun así, comprueba que los servicios y las frases describen cómo trabajas de verdad.
-5. **Fotos reales.** Las fotos actuales son imágenes ilustrativas generadas con IA y llevan un aviso que lo dice (los fondos de las cabeceras también son de IA, pero son decorativos y basta con la mención del aviso legal). Cuando tengas fotos tuyas, cámbialas siguiendo [docs/imagenes.md](docs/imagenes.md).
+5. **Fotos reales.** Las fotos actuales son imágenes ilustrativas generadas con IA y llevan un aviso que lo dice (las imágenes de fondo también son de IA, pero son decorativas y basta con la mención del aviso legal). Cuando tengas fotos tuyas, cámbialas siguiendo [docs/imagenes.md](docs/imagenes.md).
 
 ## Regenerar fotos, fondos e imágenes para compartir
 
 - **Fotos** (`src/publico/img/fotos/`): `python3 herramientas/optimizar-fotos.py CARPETA` (necesita Pillow: `pip install pillow`). Crea las versiones AVIF y WebP a 640, 960 y 1280 px.
-- **Fondos de las cabeceras** (`src/publico/img/fondos/`): `python3 herramientas/optimizar-fondos.py CARPETA`. Crea las versiones AVIF y WebP a 1440 y 1920 px y el recorte para el móvil. Qué fondo va en cada página y cómo añadir uno nuevo: [docs/imagenes.md](docs/imagenes.md).
+- **Fondos** de las cabeceras y de la portada (`src/publico/img/fondos/`): `python3 herramientas/optimizar-fondos.py CARPETA`. Crea las versiones AVIF y WebP a 1440 y 1920 px y el recorte para el móvil. Qué fondo va en cada página y cómo añadir uno nuevo: [docs/imagenes.md](docs/imagenes.md).
 - **Imágenes para compartir** (`src/publico/img/og/`, 1200 × 630): necesitan Playwright solo para esto.
   ```bash
   npm install --no-save playwright && npx playwright install chromium
@@ -108,4 +108,4 @@ La web se publica sola con GitHub Actions (`.github/workflows/publicar.yml`) cad
 - Icono de WhatsApp: [Simple Icons](https://simpleicons.org/), CC0.
 - Logo e iconos de la interfaz: dibujados en SVG para esta web a partir del logo de CleanGreen.
 - Iconos de las cinco áreas: aportados por el propietario.
-- Fotos y fondos de las cabeceras: imágenes ilustrativas generadas con IA, aportadas por el propietario.
+- Fotos e imágenes de fondo: imágenes ilustrativas generadas con IA, aportadas por el propietario.

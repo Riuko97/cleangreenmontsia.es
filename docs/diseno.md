@@ -11,7 +11,7 @@ En su lugar:
 - **Una sola paleta para las cinco áreas**: cada una se reconoce por su foto, su icono y su nombre, no por un color propio.
 - **Fotografías enmarcadas como láminas**: paspartú marfil, esquinas rectas y un marco de filete desplazado en la foto destacada.
 - **Curvas de nivel** muy tenues de fondo: el relieve del Montsià como textura.
-- **Cabeceras con fondo fotográfico** claro: el motivo a la derecha y el texto a la izquierda, bajo un velo marfil.
+- **Cabeceras con fondo fotográfico** claro: el motivo a un lado y el texto en la parte vacía, bajo un velo marfil donde hace falta.
 
 ## Referencias estudiadas
 
@@ -66,7 +66,16 @@ Las páginas interiores (servicios y cada área, guías, zonas y contacto) abren
 - **Escritorio:** el fondo cubre toda la cabecera, anclado a la derecha, con un velo marfil muy ligero. Si la página tiene foto o comparador, va a la derecha, enmarcada, con su pie debajo.
 - **Pantallas medianas (701 a 1279 px):** el motivo llega hasta el texto, así que el velo se refuerza detrás del texto (y es uniforme, al 84 %, por debajo de 980 px).
 - **Móvil:** se usa un recorte de la mitad derecha bajo un velo del 91 %. El fondo apenas se intuye y el texto se lee como sobre papel.
-- La portada no lleva fondo: su cabecera es el comparador antes/después sobre las curvas de nivel.
+
+### Fondos de la portada
+
+- **Cabecera:** el fondo `portada` (un olivo y una fachada con persiana verde), centrado como en la vista previa del propietario: el motivo queda detrás del comparador antes/después, que no cambia, y el texto va sobre la parte vacía. En el escritorio no lleva velo.
+- **Segundas residencias:** el fondo `cuidado-residencias` tiene el motivo a la izquierda, detrás de la foto, y su parte vacía es del mismo tono piedra que el apartado. Como el apartado es alto, la imagen se amplía y llega a la columna del texto, así que un velo piedra cubre siempre esa columna.
+- **Móvil y tableta:** con una sola columna el texto pasa por encima del motivo, así que el velo es uniforme: 75 % en la cabecera y 95 % en segundas residencias (allí la etiqueta ocre sobre el tono piedra tiene menos margen).
+
+### Contraste sobre las fotos
+
+Los velos no son a ojo: se ha medido el contraste real de cada línea de texto contra los píxeles que tiene detrás, en todas las páginas con fondo y en 13 anchos de pantalla, de 360 a 1920 px. Todas cumplen el nivel AA (4,5:1 para el texto normal y 3:1 para el grande). Con el velo del 60 % de la vista previa, el texto del móvil bajaba a 3,8:1 en la cabecera y a 2,1:1 en segundas residencias, sobre el tronco del olivo y la persiana; por eso es más fuerte.
 
 ## Principios de la Gestalt aplicados
 
@@ -93,7 +102,7 @@ Las fotos son **imágenes ilustrativas generadas con IA** y lo dicen: cada una l
 
 ## Accesibilidad
 
-- Contraste AA en todos los textos (el ocre de los textos pequeños es la variante oscura `--ocre-texto`).
+- Contraste AA en todos los textos (el ocre de los textos pequeños es la variante oscura `--ocre-texto`), también sobre las imágenes de fondo: ver «Contraste sobre las fotos».
 - `:focus-visible` claro en todo lo que se puede usar con el teclado; el comparador se mueve con las flechas.
 - Respeta `prefers-reduced-motion`: sin animaciones si la persona lo ha pedido.
 - Barra de contacto fija en el móvil, que se oculta al abrir el menú.

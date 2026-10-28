@@ -85,7 +85,6 @@ function cabecera(activa) {
 ${AREAS.map(a => `            <li class="area-${a.clave}"><a href="${url(RUTAS.area(a.id))}"${actual(RUTAS.area(a.id))}>${iconoArea(a, 'submenu__icono')}<span><strong>${a.nombre}</strong><small>${a.sub}</small></span></a></li>`).join('\n')}
           </ul>
         </li>
-        <li><a href="${url(RUTAS.area('segundas-residencias'))}"${actual(RUTAS.area('segundas-residencias'))}>Segundas residencias</a></li>
         <li><a href="${url(RUTAS.zonas)}"${actual(RUTAS.zonas)}${activa.startsWith('zonas/') && activa !== RUTAS.zonas ? ' class="nav__activo"' : ''}>Zonas</a></li>
         <li><a href="${url(RUTAS.guias)}"${actual(RUTAS.guias)}${activa.startsWith('guias/') && activa !== RUTAS.guias ? ' class="nav__activo"' : ''}>Guías</a></li>
         <li><a href="${url(RUTAS.contacto)}"${actual(RUTAS.contacto)}>Contacto</a></li>

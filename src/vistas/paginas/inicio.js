@@ -4,7 +4,7 @@ import { url, ic, RUTAS } from '../utilidades.js';
 import { botonWa, botonTel, etiqueta, cabeceraSeccion, comparador, imagen, notaIa, tarjetaArea, valores, pasos, calendarioAnual, faq, llamada, asistente, mapa, tarjetaGuia, listaPueblos } from '../componentes.js';
 
 export function vistaInicio({ areas, residencia, mantenimiento, zonas, otrosPueblos, guias, preguntas, pasos: listaPasos, valores: listaValores }) {
-  return `<section class="heroe" aria-labelledby="titulo-principal">
+  return `<section class="heroe cabecera--portada" aria-labelledby="titulo-principal">
   <div class="contenedor heroe__rejilla">
     <div class="heroe__texto">
       ${etiqueta('Alcanar · Amposta · La Ràpita · Montsià')}
@@ -40,7 +40,7 @@ ${areas.map(a => tarjetaArea(a)).join('\n')}
   </div>
 </section>
 
-<section class="seccion seccion--papel2 area-residencia" aria-labelledby="residencia-titulo">
+<section class="seccion fondo--cuidado-residencias area-residencia" aria-labelledby="residencia-titulo">
   <div class="contenedor destacado">
     <div class="destacado__visual" data-revelar>
       ${imagen(residencia.foto, { alt: residencia.fotoAlt, tamanos: '(min-width: 980px) 560px, 100vw' })}${notaIa()}

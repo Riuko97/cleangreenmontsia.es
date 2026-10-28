@@ -28,15 +28,15 @@ Todas las rutas son dentro de `src/publico/`.
 
 - cada foto lleva encima la nota «Imagen ilustrativa generada con IA», y el pie del comparador también lo dice;
 - su texto alternativo empieza por «Imagen ilustrativa generada con IA»;
-- el aviso legal explica que no muestran trabajos reales ni a personas del equipo (y que los fondos de las cabeceras también son de IA).
+- el aviso legal explica que no muestran trabajos reales ni a personas del equipo (y que las imágenes de fondo también son de IA).
 
 Esto lo pide la transparencia del reglamento europeo de IA para imágenes realistas, y evita que un cliente piense que son trabajos tuyos.
 
 **No se han usado las fotos de personas** con el polo de CleanGreen (limpiando, rastrillando, desbrozando o cargando el remolque). Al ser realistas y llevar tu marca, un cliente podría creer que esa persona es de tu equipo y que es quien irá a su casa.
 
-### Los fondos de las cabeceras
+### Los fondos
 
-Las páginas interiores abren con una imagen de fondo clara, con la parte izquierda vacía para el texto y el motivo a la derecha.
+Las páginas interiores abren con una imagen de fondo clara, con la parte izquierda vacía para el texto y el motivo a la derecha. La portada lleva dos.
 
 | Nombre | Qué muestra | Dónde sale |
 |---|---|---|
@@ -48,16 +48,16 @@ Las páginas interiores abren con una imagen de fondo clara, con la parte izquie
 | `servicios` | Llaves, una libreta verde y un lápiz junto a unas ramas de olivo | Servicios, guías y cada guía |
 | `contacto` | Un móvil, una libreta y un bolígrafo junto a una planta | Contacto |
 | `zonas` | Paisaje de olivos con la sierra y el mar al fondo | Zonas y la página de cada pueblo |
+| `portada` | Olivo, fachada con persiana verde y jardinera de piedra | Cabecera de la portada, detrás del comparador antes/después |
+| `cuidado-residencias` | Muro con persiana verde, maceta de barro y paisaje al fondo, con el motivo **a la izquierda** | Apartado «Segundas residencias» de la portada, detrás de la foto |
 
-La portada no lleva fondo: su cabecera es el comparador antes/después.
+También son **imágenes generadas con IA**. Como son decorativas (van en el CSS, sin texto alternativo, y quedan bajo un velo marfil cuando el texto pasa por encima), no llevan la nota encima: lo explica el aviso legal. No muestran personas.
 
-También son **imágenes generadas con IA**. Como son decorativas (van en el CSS, sin texto alternativo, y quedan bajo un velo marfil), no llevan la nota encima: lo explica el aviso legal. No muestran personas.
-
-Cada fondo tiene tres versiones: 1440 px (pantallas de hasta 1440 px), 1920 px (más anchas) y `movil-640`, un recorte de la mitad derecha para pantallas de hasta 700 px. Cada página precarga la versión que va a usar.
+Cada fondo tiene tres versiones: 1440 px (pantallas de hasta 1440 px), 1920 px (más anchas) y `movil-640`, un recorte de la mitad donde está el motivo para pantallas de hasta 700 px. `cuidado-residencias` cubre un apartado mucho más alto que una cabecera, así que fuera del móvil usa siempre la de 1920 px. Cada página precarga el fondo de su cabecera en la versión que va a usar.
 
 **Para cambiar un fondo:**
 
-1. Prepara la imagen apaisada **3:1** (1920 × 640 px), clara, con el **tercio izquierdo vacío** y el motivo a la derecha.
+1. Prepara la imagen apaisada **3:1** (1920 × 640 px), clara, con el **tercio izquierdo vacío** y el motivo a la derecha (en `cuidado-residencias`, al revés: el motivo a la izquierda, porque el texto va a la derecha).
 2. Ponla en una carpeta con el nombre de la tabla (`contacto.jpg`, `zonas.png`…) y ejecuta:
    ```bash
    python3 herramientas/optimizar-fondos.py CARPETA
@@ -85,7 +85,7 @@ Las fotos reales tuyas o de tu equipo trabajando son lo que más confianza da, a
    - el `fotoAlt` de cada área en `src/modelo/servicios.js`, describiendo el trabajo real (por ejemplo: «Parcela en Alcanar antes y después del desbroce»);
    - el `alt` y el pie del comparador en `src/vistas/componentes.js` (función `comparador`), por ejemplo «Trabajo real en Alcanar. Desliza para comparar.»;
    - quita la nota de IA: en `src/vistas/componentes.js`, haz que `notaIa` devuelva una cadena vacía;
-   - en `src/modelo/legal.js`, cambia la frase sobre las imágenes generadas con IA: si los fondos de las cabeceras siguen siendo de IA, deja la parte que habla de ellos.
+   - en `src/modelo/legal.js`, cambia la frase sobre las imágenes generadas con IA: si las imágenes de fondo siguen siendo de IA, deja la parte que habla de ellas.
 6. Vuelve a generar las imágenes para compartir:
    ```bash
    npm install --no-save playwright && npx playwright install chromium

@@ -288,7 +288,9 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
   .nav__grupo:hover .submenu,.nav__grupo:focus-within .submenu,.nav__grupo.abierto .submenu{opacity:1;visibility:visible;transform:none}
 }
 @media (max-width:1100px){.cabecera__cta{display:none}}
-@media (min-width:901px) and (max-width:1000px){.nav__lista > li > a{padding-inline:9px;font-size:.93rem}}
+/* Sin el botón de presupuesto, Servicios queda cerca del borde derecho: el
+   submenú se abre hacia la izquierda para no salirse de la pantalla. */
+@media (min-width:901px) and (max-width:1000px){.nav__lista > li > a{padding-inline:9px;font-size:.93rem}.submenu{left:auto;right:-12px}}
 
 @media (max-width:900px){
   /* Sin JavaScript, el menú queda visible como una fila desplazable */
@@ -318,11 +320,13 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
 @keyframes aparecer{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 
 /* ------------------------------------------------------------------ Héroe */
-.heroe{position:relative;padding:clamp(28px,5vw,72px) 0 clamp(56px,8vw,104px);overflow:hidden;isolation:isolate}
-.heroe::before{
-  content:"";position:absolute;inset:-10% -10% 0 30%;z-index:-1;
-  background:url("../img/topo.svg") center/cover no-repeat;
-  -webkit-mask-image:radial-gradient(closest-side,#000 45%,transparent);mask-image:radial-gradient(closest-side,#000 45%,transparent);
+/* Fondo «portada» (ver «Fondos de la portada»): el motivo a la derecha, detrás
+   del comparador, y la parte izquierda vacía para el texto. Centrado, como en la
+   vista previa: así el pie del comparador cae sobre el camino claro y no sobre
+   las plantas de la jardinera. */
+.heroe{
+  position:relative;padding:clamp(28px,5vw,72px) 0 clamp(56px,8vw,104px);overflow:hidden;isolation:isolate;
+  background-color:var(--papel);background-size:cover;background-position:center;background-repeat:no-repeat;
 }
 .heroe__rejilla{display:grid;gap:clamp(36px,5vw,64px);align-items:center}
 @media (min-width:980px){.heroe__rejilla{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}}
@@ -770,6 +774,37 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
   .cabecera--servicios{background-image:url("../img/fondos/servicios-movil-640.webp");background-image:image-set(url("../img/fondos/servicios-movil-640.avif") type("image/avif"),url("../img/fondos/servicios-movil-640.webp") type("image/webp"))}
   .cabecera--contacto{background-image:url("../img/fondos/contacto-movil-640.webp");background-image:image-set(url("../img/fondos/contacto-movil-640.avif") type("image/avif"),url("../img/fondos/contacto-movil-640.webp") type("image/webp"))}
   .cabecera--zonas{background-image:url("../img/fondos/zonas-movil-640.webp");background-image:image-set(url("../img/fondos/zonas-movil-640.avif") type("image/avif"),url("../img/fondos/zonas-movil-640.webp") type("image/webp"))}
+}
+/* Fondos de la portada. Héroe: «portada», con el motivo a la derecha, detrás
+   del comparador. Segundas residencias: «cuidado-residencias», con el motivo a
+   la izquierda, detrás de la foto; su parte vacía es del tono piedra de la
+   sección. En pantallas grandes no llevan velo: la parte vacía de la imagen
+   ya es lisa. El velo (::before) aparece cuando el motivo llega hasta el texto.
+   La sección de segundas residencias es mucho más alta que una cabecera y su
+   fondo se amplía más: fuera del móvil usa siempre la versión de 1920 px. */
+.fondo--cuidado-residencias{position:relative;isolation:isolate;background-color:var(--papel-2);background-size:cover;background-position:center left;background-repeat:no-repeat}
+.heroe::before,.fondo--cuidado-residencias::before{content:"";position:absolute;inset:0;z-index:-1}
+.cabecera--portada{background-image:url("../img/fondos/portada-1440.webp");background-image:image-set(url("../img/fondos/portada-1440.avif") type("image/avif"),url("../img/fondos/portada-1440.webp") type("image/webp"))}
+.fondo--cuidado-residencias{background-image:url("../img/fondos/cuidado-residencias-1920.webp");background-image:image-set(url("../img/fondos/cuidado-residencias-1920.avif") type("image/avif"),url("../img/fondos/cuidado-residencias-1920.webp") type("image/webp"))}
+@media (min-width:1441px){
+  .cabecera--portada{background-image:url("../img/fondos/portada-1920.webp");background-image:image-set(url("../img/fondos/portada-1920.avif") type("image/avif"),url("../img/fondos/portada-1920.webp") type("image/webp"))}
+}
+@media (max-width:700px){
+  .cabecera--portada{background-image:url("../img/fondos/portada-movil-640.webp");background-image:image-set(url("../img/fondos/portada-movil-640.avif") type("image/avif"),url("../img/fondos/portada-movil-640.webp") type("image/webp"))}
+  .fondo--cuidado-residencias{background-image:url("../img/fondos/cuidado-residencias-movil-640.webp");background-image:image-set(url("../img/fondos/cuidado-residencias-movil-640.avif") type("image/avif"),url("../img/fondos/cuidado-residencias-movil-640.webp") type("image/webp"))}
+}
+@media (min-width:980px) and (max-width:1279px){
+  .heroe::before{background:linear-gradient(90deg,rgba(247,244,235,.92) 0%,rgba(247,244,235,.86) 44%,rgba(247,244,235,.45) 64%,rgba(247,244,235,.3) 100%)}
+}
+/* En segundas residencias el fondo se amplía tanto que el motivo llega a la
+   columna del texto en todos los anchos: el velo la cubre siempre. */
+@media (min-width:980px){
+  .fondo--cuidado-residencias::before{background:linear-gradient(270deg,rgba(237,231,219,.92) 0%,rgba(237,231,219,.9) 54%,rgba(237,231,219,0) 70%)}
+}
+/* Con una sola columna, el texto va encima del motivo: velo uniforme. */
+@media (max-width:979px){
+  .heroe::before{background:rgba(247,244,235,.75)}
+  .fondo--cuidado-residencias::before{background:rgba(237,231,219,.95)}
 }
 /* Pies de foto sobre el fondo: una banda marfil para que se lean sobre la imagen */
 .ilustracion__pie{display:table;margin:10px 0 0;padding:2px 8px;border-radius:var(--radio-s);background:rgba(247,244,235,.88);font-size:.75rem;font-weight:600;letter-spacing:.02em;color:var(--suave)}
