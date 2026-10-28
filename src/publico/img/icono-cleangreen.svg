@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 460" role="img" aria-labelledby="t"><title id="t">CleanGreen</title>
+  <defs>
+    <mask id="e-casa" maskUnits="userSpaceOnUse" x="0" y="0" width="480" height="460">
+      <rect width="480" height="460" fill="#fff"/>
+      <path d="M84 392 C 150 300, 296 234, 430 224 C 414 334, 334 432, 214 448 C 160 455, 112 432, 84 392 Z" fill="#000" stroke="#000" stroke-width="22" stroke-linejoin="round"/>
+    </mask>
+    <mask id="e-hoja" maskUnits="userSpaceOnUse" x="0" y="0" width="480" height="460">
+      <rect width="480" height="460" fill="#fff"/>
+      <path d="M112 396 C 190 372, 270 330, 356 288" fill="none" stroke="#000" stroke-width="9" stroke-linecap="round"/>
+    </mask>
+  </defs>
+  <g mask="url(#e-casa)">
+    <path d="M26 212 L223 63 L422 206" fill="none" stroke="#00977a" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M86 226 C 70 292, 82 346, 128 384" fill="none" stroke="#00977a" stroke-width="24" stroke-linecap="round"/>
+    <rect x="323" y="86" width="48" height="78" rx="8" fill="#00977a"/>
+    <g fill="#03241c">
+      <rect x="187" y="170" width="37" height="37" rx="6"/><rect x="232" y="170" width="37" height="37" rx="6"/>
+      <rect x="187" y="215" width="37" height="37" rx="6"/><rect x="232" y="215" width="37" height="37" rx="6"/>
+    </g>
+  </g>
+  <path d="M84 392 C 150 300, 296 234, 430 224 C 414 334, 334 432, 214 448 C 160 455, 112 432, 84 392 Z" fill="#00977a" mask="url(#e-hoja)"/>
+  <path d="M415 12 C 420 50, 432 62, 471 70 C 432 78, 420 90, 415 128 C 410 90, 398 78, 359 70 C 398 62, 410 50, 415 12 Z" fill="#00977a"/></svg>

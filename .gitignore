@@ -1,0 +1,6 @@
+# Copias de trabajo de Claude Code (no forman parte de la web)
+.claude/worktrees/
+.DS_Store
+# Web generada y dependencias (se construyen con npm run build)
+dist/
+node_modules/
