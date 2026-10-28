@@ -1,0 +1,17 @@
+{
+  "name": "cleangreenmontsia",
+  "version": "2.0.0",
+  "description": "Web de CleanGreen: limpieza de casas y pisos, jardinería, desbroce de parcelas, segundas residencias y mantenimiento en el Montsià.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node src/controlador/construir.js",
+    "check": "node src/controlador/comprobar.js",
+    "dev": "node src/controlador/construir.js && node src/controlador/servidor.js --vigilar",
+    "start": "node src/controlador/servidor.js"
+  },
+  "license": "UNLICENSED"
+}
