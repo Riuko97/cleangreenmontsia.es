@@ -25,9 +25,9 @@
      va junto en un fondo y un borde comunes.
    · Continuidad: los pasos del proceso están unidos por una línea; todo se
      alinea a una misma rejilla y a un mismo borde izquierdo.
-   · Cierre: el logo y las ilustraciones se leen completos aunque algunas
-     formas estén abiertas; el comparador se completa al deslizar.
-   · Figura-fondo: bandas oscuras que separan bloques, ilustraciones
+   · Cierre: el logo y los iconos se leen completos aunque algunas formas
+     estén abiertas; el comparador se completa al deslizar.
+   · Figura-fondo: bandas oscuras que separan bloques, fotos
      enmarcadas sobre un fondo propio y una sola llamada principal (verde
      WhatsApp) en cada pantalla.
    · Pregnancia y punto focal: formas simples (rectángulos redondeados,
@@ -114,6 +114,8 @@ body{
   overflow-x:hidden;
 }
 img,svg{display:block;max-width:100%;height:auto}
+/* <picture> no añade caja: la imagen se coloca como si fuera hija directa */
+picture{display:contents}
 [hidden]{display:none!important}
 a{color:var(--marca-osc);text-decoration-thickness:.08em;text-underline-offset:.18em}
 a:hover{color:var(--tinta)}
@@ -403,12 +405,10 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:800;letter-spacing:0}
 .tarjeta-area__mas{display:inline-flex;align-items:center;gap:.4em;margin-top:auto;font-weight:750;font-size:.95rem;color:var(--area-osc)}
 .tarjeta-area__mas svg{width:1.1em;height:1.1em;transition:transform .15s}
 .tarjeta-area:hover .tarjeta-area__mas svg{transform:translateX(3px)}
-/* Las dos tarjetas anchas de la portada: ilustración a la izquierda, sin recortar */
+/* Las dos tarjetas anchas de la portada: la foto a la izquierda, a toda altura */
 @media (min-width:1000px){
   .areas:not(.areas--3) > :nth-child(4),.areas:not(.areas--3) > :nth-child(5){flex-direction:row;align-items:stretch}
-  .areas:not(.areas--3) > :nth-child(4) .tarjeta-area__imagen,.areas:not(.areas--3) > :nth-child(5) .tarjeta-area__imagen{
-    flex:0 0 48%;aspect-ratio:auto;display:flex;align-items:center;padding:var(--e-4)}
-  .areas:not(.areas--3) > :nth-child(4) .tarjeta-area__imagen img,.areas:not(.areas--3) > :nth-child(5) .tarjeta-area__imagen img{height:auto;aspect-ratio:4/3;border-radius:12px;box-shadow:var(--sombra-1)}
+  .areas:not(.areas--3) > :nth-child(4) .tarjeta-area__imagen,.areas:not(.areas--3) > :nth-child(5) .tarjeta-area__imagen{flex:0 0 46%;aspect-ratio:auto;min-height:260px}
   .areas:not(.areas--3) > :nth-child(4) .tarjeta-area__cuerpo,.areas:not(.areas--3) > :nth-child(5) .tarjeta-area__cuerpo{padding:var(--e-5) var(--e-4) var(--e-3) var(--e-5)}
   .areas:not(.areas--3) > :nth-child(4) .tarjeta-area__icono,.areas:not(.areas--3) > :nth-child(5) .tarjeta-area__icono{top:var(--e-4)}
 }
@@ -540,7 +540,8 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:800;letter-spacing:0}
 /* ------------------------------------------------- Calendario del año */
 .ano{display:grid;gap:clamp(32px,5vw,64px);align-items:start}
 @media (min-width:1000px){.ano{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}.ano__texto{position:sticky;top:calc(var(--alto-cabecera) + 24px)}}
-.ano__ilustracion{width:100%;max-width:520px;margin:var(--e-5) 0;border-radius:var(--radio-l);border:6px solid #fff;box-shadow:var(--sombra-2)}
+.ano__ilustracion{position:relative;max-width:520px;margin:var(--e-5) 0}
+.ano__ilustracion img{width:100%;border-radius:var(--radio-l);border:6px solid #fff;box-shadow:var(--sombra-2)}
 .estaciones{display:grid;gap:var(--e-4);list-style:none;margin:0;padding:0}
 @media (min-width:640px){.estaciones{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .estacion{
@@ -733,6 +734,14 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:800;letter-spacing:0}
 .cabecera-pagina__visual{min-width:0}
 .ilustracion{margin:0;position:relative;isolation:isolate}
 .ilustracion img{width:100%;border-radius:var(--radio-l);border:6px solid #fff;box-shadow:var(--sombra-3)}
+/* Nota sobre cada foto: son imágenes ilustrativas generadas con IA (lo exige la
+   transparencia del reglamento europeo de IA y evita que parezcan trabajos reales).
+   Sobre fondo casi opaco para que se lea encima de cualquier foto. */
+.nota-ia{
+  position:absolute;left:12px;bottom:14px;z-index:1;max-width:calc(100% - 24px);padding:3px 10px;border-radius:999px;
+  background:rgba(3,36,28,.82);color:#fff;font-size:.72rem;font-weight:600;line-height:1.45;pointer-events:none;
+}
+.ilustracion .nota-ia,.destacado__visual .nota-ia,.ano__ilustracion .nota-ia{left:18px;bottom:18px}
 .migas ol{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0 0 var(--e-5);padding:0;font-size:.88rem;color:var(--suave)}
 .migas li+li::before{content:"/";margin-right:6px;color:#9c8f74}
 .migas a{color:var(--suave);font-weight:650}
@@ -795,6 +804,7 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:800;letter-spacing:0}
 .bloque-area::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--area)}
 .bloque-area__cabecera{display:grid;gap:var(--e-5);align-items:center}
 @media (min-width:760px){.bloque-area__cabecera{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}}
+.bloque-area__foto{position:relative}
 .bloque-area__cabecera img{width:100%;border-radius:var(--radio);background:var(--area-suave)}
 .bloque-area__cabecera h2{font-size:clamp(1.6rem,1.25rem + 1.3vw,2.2rem);margin:var(--e-3) 0 var(--e-2)}
 .bloque-area__cabecera p{color:var(--suave)}
@@ -866,12 +876,12 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:800;letter-spacing:0}
 .legal th{background:var(--papel-2);width:34%}
 .pendiente{background:#fff3c4;border-radius:4px;padding:0 .3em;font-weight:700;color:#5c4300}
 
-/* 404: la mitad derecha de la ilustración, «comida por la maleza» */
+/* 404: la mitad derecha de la foto, «comida por la maleza» */
 .no-encontrada{min-height:60vh;display:grid;place-items:center;text-align:center;padding-block:clamp(32px,5vw,64px) var(--seccion)}
 .no-encontrada .entradilla{margin-inline:auto}
 .ilustracion-404{position:relative;width:min(420px,100%);margin:0 auto var(--e-6);border-radius:var(--radio-l);overflow:hidden;border:6px solid #fff;box-shadow:var(--sombra-2);aspect-ratio:4/3}
-.ilustracion-404 img{position:absolute;inset:0;width:100%;height:100%}
-.ilustracion-404 img + img{clip-path:inset(0 0 0 50%)}
+.ilustracion-404 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ilustracion-404__antes{clip-path:inset(0 0 0 50%)}
 
 /* --------------------------------------------------- Aparición suave */
 .js [data-revelar]{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}

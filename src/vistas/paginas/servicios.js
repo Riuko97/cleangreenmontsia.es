@@ -1,7 +1,7 @@
 // VISTAS · Página de servicios (índice de áreas) y página de cada área.
 import { negocio } from '../../modelo/negocio.js';
 import { url, ic, RUTAS, enlazar } from '../utilidades.js';
-import { botonWa, botonTel, etiqueta, cabeceraPagina, cabeceraSeccion, comparador, ilustracion, tarjetaArea, tarjetaServicio, calendarioIncendios, calendarioAnual, faq, llamada, tarjetaGuia } from '../componentes.js';
+import { botonWa, botonTel, etiqueta, cabeceraPagina, cabeceraSeccion, comparador, ilustracion, imagen, notaIa, tarjetaArea, tarjetaServicio, calendarioIncendios, calendarioAnual, faq, llamada, tarjetaGuia } from '../componentes.js';
 
 // --------------------------------------------------------- Índice de servicios
 export function vistaServicios({ areas }) {
@@ -21,7 +21,7 @@ ${areas.map(a => `        <li class="area-${a.clave}"><a href="#${a.id}">${ic(a.
     </nav>
 ${areas.map(a => `    <section class="bloque-area area-${a.clave}" id="${a.id}" aria-labelledby="t-${a.id}" data-revelar>
       <div class="bloque-area__cabecera">
-        <img src="${url(a.ilustracion)}" alt="" width="640" height="480" loading="lazy" decoding="async">
+        <div class="bloque-area__foto">${imagen(a.foto, { tamanos: '(min-width: 760px) 440px, 100vw' })}${notaIa()}</div>
         <div>
           <span class="bloque-area__icono">${ic(a.icono)}</span>
           <h2 id="t-${a.id}">${a.nombre}</h2>
@@ -56,7 +56,7 @@ ${llamada()}`;
 // ------------------------------------------------------------ Página de un área
 export function vistaArea({ area, relacionadas, guia, zonas }) {
   const mensaje = `Hola, CleanGreen. Quiero pedir presupuesto de ${area.nombre.toLowerCase()}.`;
-  const visual = area.comparador ? comparador() : ilustracion(area.ilustracion, area.ilustracionAlt, { prioridad: true });
+  const visual = area.comparador ? comparador() : ilustracion(area.foto, area.fotoAlt, { prioridad: true });
   let extra = '';
 
   if (area.clave === 'parcela') {

@@ -54,7 +54,7 @@ export function rutas() {
     const ruta = RUTAS.area(area.id);
     r.push({
       ruta, prioridad: '0.9',
-      meta: { titulo: marca(area.titulo), descripcion: area.descripcion, imagen: `img/og/${area.clave}.jpg`, imagenAlt: area.ilustracionAlt },
+      meta: { titulo: marca(area.titulo), descripcion: area.descripcion, imagen: `img/og/${area.clave}.jpg`, imagenAlt: `CleanGreen: ${area.nombre.toLowerCase()} en el Montsià (foto ilustrativa generada con IA)` },
       cuerpo: () => vistaArea({
         area,
         relacionadas: area.relacionadas.map(areaPorId),

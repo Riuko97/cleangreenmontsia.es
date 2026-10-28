@@ -1,7 +1,7 @@
 // VISTAS · Contacto, páginas legales y página de error.
 import { negocio } from '../../modelo/negocio.js';
 import { url, ic, RUTAS } from '../utilidades.js';
-import { botonWa, botonTel, etiqueta, cabeceraPagina, cabeceraSeccion, asistente, migas } from '../componentes.js';
+import { botonWa, botonTel, etiqueta, cabeceraPagina, cabeceraSeccion, asistente, migas, imagen, notaIa } from '../componentes.js';
 
 export function vistaContacto() {
   return cabeceraPagina({
@@ -46,7 +46,7 @@ ${legal.html}
 export function vistaError() {
   return `<div class="no-encontrada">
   <div class="contenedor contenedor--estrecho">
-    <div class="ilustracion-404"><img src="${url('img/ilustraciones/parcela-despues.svg')}" alt="" width="640" height="480"><img src="${url('img/ilustraciones/parcela-antes.svg')}" alt="" width="640" height="480"></div>
+    <div class="ilustracion-404">${imagen('parcela-despues', { tamanos: '420px' })}${imagen('parcela-antes', { clase: 'ilustracion-404__antes', tamanos: '420px' })}${notaIa()}</div>
     ${etiqueta('Error 404')}
     <h1>Esta página se la ha comido la maleza</h1>
     <p class="entradilla">No encontramos lo que buscas. Puede que el enlace esté mal o que la página ya no exista.</p>

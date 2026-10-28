@@ -1,7 +1,7 @@
 // VISTA · Portada.
 import { negocio } from '../../modelo/negocio.js';
 import { url, ic, RUTAS } from '../utilidades.js';
-import { botonWa, botonTel, etiqueta, cabeceraSeccion, comparador, tarjetaArea, valores, pasos, calendarioAnual, faq, llamada, asistente, mapa, tarjetaGuia, listaPueblos } from '../componentes.js';
+import { botonWa, botonTel, etiqueta, cabeceraSeccion, comparador, imagen, notaIa, tarjetaArea, valores, pasos, calendarioAnual, faq, llamada, asistente, mapa, tarjetaGuia, listaPueblos } from '../componentes.js';
 
 export function vistaInicio({ areas, residencia, mantenimiento, zonas, otrosPueblos, guias, preguntas, pasos: listaPasos, valores: listaValores }) {
   return `<section class="heroe" aria-labelledby="titulo-principal">
@@ -43,7 +43,7 @@ ${areas.map(a => tarjetaArea(a)).join('\n')}
 <section class="seccion seccion--papel2 area-residencia" aria-labelledby="residencia-titulo">
   <div class="contenedor destacado">
     <div class="destacado__visual" data-revelar>
-      <img src="${url(residencia.ilustracion)}" alt="${residencia.ilustracionAlt}" width="640" height="480" loading="lazy" decoding="async">
+      ${imagen(residencia.foto, { alt: residencia.fotoAlt, tamanos: '(min-width: 980px) 560px, 100vw' })}${notaIa()}
     </div>
     <div data-revelar>
       ${etiqueta('Segundas residencias', 'i-llave')}
@@ -80,7 +80,7 @@ ${residencia.servicios.map(s => `        <li>${ic('i-check')}<span><strong>${s.n
       ${etiqueta('Mantenimiento periódico', 'i-calendario')}
       <h2 id="ano-titulo">Un calendario para todo el año</h2>
       <p class="entradilla">${mantenimiento.parrafos[0]}</p>
-      <img class="ano__ilustracion" src="${url(mantenimiento.ilustracion)}" alt="${mantenimiento.ilustracionAlt}" width="640" height="480" loading="lazy" decoding="async">
+      <figure class="ano__ilustracion">${imagen(mantenimiento.foto, { alt: mantenimiento.fotoAlt, tamanos: '(min-width: 600px) 520px, 100vw' })}${notaIa()}</figure>
       <a class="boton boton--oscuro" href="${url(RUTAS.area(mantenimiento.id))}">Ver el mantenimiento ${ic('i-flecha')}</a>
     </div>
     ${calendarioAnual(mantenimiento.calendario)}

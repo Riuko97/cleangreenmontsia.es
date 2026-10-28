@@ -45,26 +45,39 @@ export const cabeceraPagina = ({ migas: m, etiqueta: et, icono = 'i-destello', h
   </div>
 </section>`;
 
-export const ilustracion = (src, alt, { prioridad = false, clase = '' } = {}) =>
-  `<figure class="ilustracion ${clase}"><img src="${url(src)}" alt="${esc(alt)}" width="640" height="480"${prioridad ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async"></figure>`;
+// ------------------------------------------------------------------- Fotos
+// Cada foto está en AVIF (con WebP de respaldo) a 640, 960 y 1280 px de ancho; las
+// genera herramientas/optimizar-fotos.py. Son imágenes ilustrativas generadas con IA:
+// lo dicen el alt de las informativas y una nota visible sobre cada foto.
+const ANCHOS = [640, 960, 1280];
+const variantes = (nombre, formato) => ANCHOS.map(w => `${url(`img/fotos/${nombre}-${w}.${formato}`)} ${w}w`).join(', ');
+
+export const imagen = (nombre, { alt = '', tamanos = '100vw', prioridad = false, clase = '' } = {}) =>
+  `<picture><source type="image/avif" srcset="${variantes(nombre, 'avif')}" sizes="${tamanos}"><img${clase ? ` class="${clase}"` : ''} src="${url(`img/fotos/${nombre}-960.webp`)}" srcset="${variantes(nombre, 'webp')}" sizes="${tamanos}" alt="${esc(alt)}" width="1280" height="960"${prioridad ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async"></picture>`;
+
+// El alt ya lo dice en las fotos informativas; la nota es para quien las ve.
+export const notaIa = () => '<span class="nota-ia" aria-hidden="true">Imagen ilustrativa generada con IA</span>';
+
+export const ilustracion = (nombre, alt, { prioridad = false, clase = '', tamanos = '(min-width: 980px) 520px, 100vw' } = {}) =>
+  `<figure class="ilustracion ${clase}">${imagen(nombre, { alt, tamanos, prioridad })}${notaIa()}</figure>`;
 
 // ------------------------------------------------- Comparador antes/después
 export const comparador = ({ prioridad = true } = {}) => `<div class="comparador-marco">
       <div class="comparador" data-comparador>
-        <img src="${url('img/ilustraciones/parcela-despues.svg')}" width="640" height="480"${prioridad ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async" alt="Ilustración de una casa con jardín y parcela con la Serra del Montsià al fondo: a la izquierda, invadida por la hierba alta y las zarzas; a la derecha, limpia y cuidada.">
-        <img class="comparador__antes" src="${url('img/ilustraciones/parcela-antes.svg')}" width="640" height="480" decoding="async" alt="">
+        ${imagen('parcela-despues', { alt: 'Imagen ilustrativa generada con IA de una parcela con un olivo y montañas al fondo: a la izquierda, con la hierba alta y seca; a la derecha, desbrozada y limpia.', tamanos: '(min-width: 980px) 520px, 100vw', prioridad })}
+        ${imagen('parcela-antes', { clase: 'comparador__antes', tamanos: '(min-width: 980px) 520px, 100vw', prioridad })}
         <span class="comparador__etiqueta comparador__etiqueta--antes">Antes</span>
         <span class="comparador__etiqueta comparador__etiqueta--despues">Después</span>
         <input type="range" min="0" max="100" value="50" step="0.5" aria-label="Desliza para comparar el antes y el después">
         <span class="comparador__linea" aria-hidden="true"></span>
         <span class="comparador__mango" aria-hidden="true">${ic('i-flechas')}</span>
       </div>
-      <p class="comparador__pie">${ic('i-flechas')} Ilustración: arrastra para ver el antes y el después</p>
+      <p class="comparador__pie">${ic('i-flechas')} Imagen ilustrativa generada con IA. Desliza para comparar.</p>
     </div>`;
 
 // ------------------------------------------------------- Tarjetas de área
 export const tarjetaArea = (area, { titulo = 'h3', destacada = false } = {}) => `<article class="tarjeta-area area-${area.clave}${destacada ? ' tarjeta-area--destacada' : ''}" data-revelar>
-        <div class="tarjeta-area__imagen"><img src="${url(area.ilustracion)}" alt="" width="640" height="480" loading="lazy" decoding="async"></div>
+        <div class="tarjeta-area__imagen">${imagen(area.foto, { tamanos: '(min-width: 1000px) 400px, (min-width: 640px) 50vw, 100vw' })}${notaIa()}</div>
         <div class="tarjeta-area__cuerpo">
           <span class="tarjeta-area__icono">${ic(area.icono)}</span>
           <${titulo}><a href="${url(RUTAS.area(area.id))}">${area.nombre}</a></${titulo}>
