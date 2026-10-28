@@ -6,7 +6,7 @@ import { botonWa, botonTel, etiqueta, cabeceraPagina, cabeceraSeccion, asistente
 export function vistaContacto() {
   return cabeceraPagina({
     migas: [['Inicio', ''], ['Contacto']],
-    etiqueta: 'Contacto', icono: 'i-whatsapp',
+    etiqueta: 'Contacto', icono: 'i-whatsapp', fondo: 'contacto',
     h1: 'Pide presupuesto sin compromiso',
     entradilla: 'La forma más rápida es WhatsApp: prepara el mensaje aquí abajo, envíalo y adjunta 2 o 3 fotos y la ubicación. También puedes llamarnos.',
     acciones: botonWa('Abrir WhatsApp', { clase: 'boton--grande' }) + botonTel(negocio.telefonoVisible, 'boton--borde boton--grande'),

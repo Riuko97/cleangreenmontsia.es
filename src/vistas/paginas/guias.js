@@ -5,7 +5,7 @@ import { botonWa, etiqueta, cabeceraPagina, faq, llamada, calendarioIncendios, t
 export function vistaGuias({ guias }) {
   return cabeceraPagina({
     migas: [['Inicio', ''], ['Guías']],
-    etiqueta: 'Guías', icono: 'i-presupuesto',
+    etiqueta: 'Guías', icono: 'i-presupuesto', fondo: 'servicios',
     h1: 'Guías para propietarios',
     entradilla: 'Información práctica, con fuentes, sobre la normativa de las parcelas y sobre cómo cuidar una casa que pasa meses cerrada.',
   }) + `
@@ -36,7 +36,7 @@ const bloque = b => {
 export function vistaGuia({ guia, area, fechaLegible }) {
   return cabeceraPagina({
     migas: [['Inicio', ''], ['Guías', RUTAS.guias], [guia.titulo]],
-    etiqueta: 'Guía para propietarios', icono: guia.icono,
+    etiqueta: 'Guía para propietarios', icono: guia.icono, fondo: 'servicios',
     h1: guia.h1,
     entradilla: `${guia.entradilla} <span class="fecha">Revisada el <time datetime="${guia.fecha}">${fechaLegible}</time>.</span>`,
     area: area.clave,

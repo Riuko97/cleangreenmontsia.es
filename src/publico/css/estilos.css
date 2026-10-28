@@ -253,14 +253,15 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
 .nav__desplegar svg{width:15px;height:15px;transition:transform .2s}
 .nav__grupo.abierto .nav__desplegar svg{transform:rotate(180deg)}
 
-/* Submenú de servicios: lista con filetes, sin iconos */
+/* Submenú de servicios: lista con filetes y el icono de cada área */
 .submenu li + li{border-top:1px solid var(--linea-2)}
 .submenu li a{
-  display:flex;align-items:baseline;gap:var(--e-3);padding:12px 14px;
+  display:flex;align-items:center;gap:var(--e-3);padding:12px 14px;
   color:var(--tinta);text-decoration:none;line-height:1.3;transition:background-color .12s;
 }
 .submenu li a:hover,.submenu li a[aria-current="page"]{background:var(--papel)}
 .submenu .icono{display:none}
+.submenu__icono{flex:none;width:32px;height:32px}
 .submenu strong{display:block;font-weight:650;font-size:.97rem}
 .submenu small{display:block;color:var(--suave);font-size:.84rem;margin-top:2px}
 
@@ -404,7 +405,7 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
 .tarjeta-area__imagen img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .tarjeta-area:hover .tarjeta-area__imagen img{transform:scale(1.025)}
 .tarjeta-area__cuerpo{position:relative;display:flex;flex-direction:column;flex:1;padding:var(--e-5) var(--e-5) var(--e-5)}
-.tarjeta-area__icono{display:none}
+.tarjeta-area__icono{display:block;width:46px;height:46px;margin-bottom:var(--e-3)}
 .tarjeta-area h2,.tarjeta-area h3{font-size:clamp(1.3rem,1.15rem + .5vw,1.5rem);margin:0 0 var(--e-2)}
 .tarjeta-area h2 a,.tarjeta-area h3 a{color:var(--tinta);text-decoration:none}
 .tarjeta-area h2 a::after,.tarjeta-area h3 a::after{content:"";position:absolute;inset:0;z-index:1}
@@ -714,10 +715,65 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
 }
 .cabecera-pagina::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px}
 .cabecera-pagina__rejilla{display:grid;gap:clamp(32px,5vw,56px);align-items:center}
-@media (min-width:980px){.cabecera-pagina--visual .cabecera-pagina__rejilla{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}}
+@media (min-width:980px){.cabecera-pagina--visual .cabecera-pagina__rejilla{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(32px,5vw,64px)}}
 .cabecera-pagina h1{max-width:17em;font-size:clamp(2.05rem,1.3rem + 3vw,3.3rem)}
 .cabecera-pagina .entradilla{margin-bottom:0}
 .cabecera-pagina__visual{min-width:0}
+/* Cabeceras con fondo fotográfico (clase común .cabecera-servicio y una
+   .cabecera--<nombre> por fondo, con el nombre de sus archivos en img/fondos/).
+   El fondo cubre toda la cabecera, anclado a la derecha, donde está el motivo;
+   la parte izquierda de cada imagen está vacía para el texto. Encima, un velo
+   marfil muy ligero (25 % a 12 %). En el móvil, el velo sube al 91 % y el fondo
+   apenas se intuye detrás del texto.
+   Cada fondo está en AVIF con respaldo WebP: los navegadores sin image-set()
+   se quedan con la primera declaración (WebP). plantilla.js precarga la versión
+   AVIF de cada ancho con estas mismas media queries (700 y 1440 px): si cambian
+   aquí, hay que cambiarlas también allí. */
+.cabecera-servicio{
+  display:flex;align-items:center;min-height:340px;
+  background-color:var(--papel);background-size:cover;background-position:center right;background-repeat:no-repeat;
+}
+.cabecera-servicio > .contenedor{width:100%}
+.cabecera-servicio::before{inset:0;background:linear-gradient(90deg,rgba(247,244,235,.25),rgba(247,244,235,.125));-webkit-mask-image:none;mask-image:none}
+@media (min-width:701px){.cabecera-servicio:not(.cabecera-pagina--visual) .cabecera-pagina__rejilla > div{max-width:min(600px,48vw)}}
+/* En pantallas medianas el motivo del fondo llega hasta el texto: el velo se
+   refuerza solo detrás del texto para que se lea bien. */
+@media (min-width:980px) and (max-width:1279px){
+  .cabecera-servicio::before{background:linear-gradient(90deg,rgba(247,244,235,.92) 0%,rgba(247,244,235,.86) 44%,rgba(247,244,235,.3) 64%,rgba(247,244,235,.12) 100%)}
+}
+@media (min-width:701px) and (max-width:979px){.cabecera-servicio::before{background:rgba(247,244,235,.84)}}
+@media (max-width:700px){.cabecera-servicio::before{background:rgba(247,244,235,.91)}}
+.cabecera--limpieza{background-image:url("../img/fondos/limpieza-1440.webp");background-image:image-set(url("../img/fondos/limpieza-1440.avif") type("image/avif"),url("../img/fondos/limpieza-1440.webp") type("image/webp"))}
+.cabecera--jardineria{background-image:url("../img/fondos/jardineria-1440.webp");background-image:image-set(url("../img/fondos/jardineria-1440.avif") type("image/avif"),url("../img/fondos/jardineria-1440.webp") type("image/webp"))}
+.cabecera--desbroce{background-image:url("../img/fondos/desbroce-1440.webp");background-image:image-set(url("../img/fondos/desbroce-1440.avif") type("image/avif"),url("../img/fondos/desbroce-1440.webp") type("image/webp"))}
+.cabecera--segunda-residencia{background-image:url("../img/fondos/segunda-residencia-1440.webp");background-image:image-set(url("../img/fondos/segunda-residencia-1440.avif") type("image/avif"),url("../img/fondos/segunda-residencia-1440.webp") type("image/webp"))}
+.cabecera--mantenimiento{background-image:url("../img/fondos/mantenimiento-1440.webp");background-image:image-set(url("../img/fondos/mantenimiento-1440.avif") type("image/avif"),url("../img/fondos/mantenimiento-1440.webp") type("image/webp"))}
+.cabecera--servicios{background-image:url("../img/fondos/servicios-1440.webp");background-image:image-set(url("../img/fondos/servicios-1440.avif") type("image/avif"),url("../img/fondos/servicios-1440.webp") type("image/webp"))}
+.cabecera--contacto{background-image:url("../img/fondos/contacto-1440.webp");background-image:image-set(url("../img/fondos/contacto-1440.avif") type("image/avif"),url("../img/fondos/contacto-1440.webp") type("image/webp"))}
+.cabecera--zonas{background-image:url("../img/fondos/zonas-1440.webp");background-image:image-set(url("../img/fondos/zonas-1440.avif") type("image/avif"),url("../img/fondos/zonas-1440.webp") type("image/webp"))}
+@media (min-width:1441px){
+  .cabecera--limpieza{background-image:url("../img/fondos/limpieza-1920.webp");background-image:image-set(url("../img/fondos/limpieza-1920.avif") type("image/avif"),url("../img/fondos/limpieza-1920.webp") type("image/webp"))}
+  .cabecera--jardineria{background-image:url("../img/fondos/jardineria-1920.webp");background-image:image-set(url("../img/fondos/jardineria-1920.avif") type("image/avif"),url("../img/fondos/jardineria-1920.webp") type("image/webp"))}
+  .cabecera--desbroce{background-image:url("../img/fondos/desbroce-1920.webp");background-image:image-set(url("../img/fondos/desbroce-1920.avif") type("image/avif"),url("../img/fondos/desbroce-1920.webp") type("image/webp"))}
+  .cabecera--segunda-residencia{background-image:url("../img/fondos/segunda-residencia-1920.webp");background-image:image-set(url("../img/fondos/segunda-residencia-1920.avif") type("image/avif"),url("../img/fondos/segunda-residencia-1920.webp") type("image/webp"))}
+  .cabecera--mantenimiento{background-image:url("../img/fondos/mantenimiento-1920.webp");background-image:image-set(url("../img/fondos/mantenimiento-1920.avif") type("image/avif"),url("../img/fondos/mantenimiento-1920.webp") type("image/webp"))}
+  .cabecera--servicios{background-image:url("../img/fondos/servicios-1920.webp");background-image:image-set(url("../img/fondos/servicios-1920.avif") type("image/avif"),url("../img/fondos/servicios-1920.webp") type("image/webp"))}
+  .cabecera--contacto{background-image:url("../img/fondos/contacto-1920.webp");background-image:image-set(url("../img/fondos/contacto-1920.avif") type("image/avif"),url("../img/fondos/contacto-1920.webp") type("image/webp"))}
+  .cabecera--zonas{background-image:url("../img/fondos/zonas-1920.webp");background-image:image-set(url("../img/fondos/zonas-1920.avif") type("image/avif"),url("../img/fondos/zonas-1920.webp") type("image/webp"))}
+}
+@media (max-width:700px){
+  .cabecera--limpieza{background-image:url("../img/fondos/limpieza-movil-640.webp");background-image:image-set(url("../img/fondos/limpieza-movil-640.avif") type("image/avif"),url("../img/fondos/limpieza-movil-640.webp") type("image/webp"))}
+  .cabecera--jardineria{background-image:url("../img/fondos/jardineria-movil-640.webp");background-image:image-set(url("../img/fondos/jardineria-movil-640.avif") type("image/avif"),url("../img/fondos/jardineria-movil-640.webp") type("image/webp"))}
+  .cabecera--desbroce{background-image:url("../img/fondos/desbroce-movil-640.webp");background-image:image-set(url("../img/fondos/desbroce-movil-640.avif") type("image/avif"),url("../img/fondos/desbroce-movil-640.webp") type("image/webp"))}
+  .cabecera--segunda-residencia{background-image:url("../img/fondos/segunda-residencia-movil-640.webp");background-image:image-set(url("../img/fondos/segunda-residencia-movil-640.avif") type("image/avif"),url("../img/fondos/segunda-residencia-movil-640.webp") type("image/webp"))}
+  .cabecera--mantenimiento{background-image:url("../img/fondos/mantenimiento-movil-640.webp");background-image:image-set(url("../img/fondos/mantenimiento-movil-640.avif") type("image/avif"),url("../img/fondos/mantenimiento-movil-640.webp") type("image/webp"))}
+  .cabecera--servicios{background-image:url("../img/fondos/servicios-movil-640.webp");background-image:image-set(url("../img/fondos/servicios-movil-640.avif") type("image/avif"),url("../img/fondos/servicios-movil-640.webp") type("image/webp"))}
+  .cabecera--contacto{background-image:url("../img/fondos/contacto-movil-640.webp");background-image:image-set(url("../img/fondos/contacto-movil-640.avif") type("image/avif"),url("../img/fondos/contacto-movil-640.webp") type("image/webp"))}
+  .cabecera--zonas{background-image:url("../img/fondos/zonas-movil-640.webp");background-image:image-set(url("../img/fondos/zonas-movil-640.avif") type("image/avif"),url("../img/fondos/zonas-movil-640.webp") type("image/webp"))}
+}
+/* Pies de foto sobre el fondo: una banda marfil para que se lean sobre la imagen */
+.ilustracion__pie{display:table;margin:10px 0 0;padding:2px 8px;border-radius:var(--radio-s);background:rgba(247,244,235,.88);font-size:.75rem;font-weight:600;letter-spacing:.02em;color:var(--suave)}
+.cabecera-servicio .comparador__pie{width:fit-content;margin-inline:auto;padding:4px 10px;border-radius:var(--radio-s);background:rgba(247,244,235,.88)}
 .ilustracion{margin:0;position:relative;isolation:isolate}
 .ilustracion img{width:100%}
 /* Nota sobre cada foto: son imágenes ilustrativas generadas con IA (lo exige la
@@ -787,6 +843,8 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
   font-weight:650;font-size:.95rem;line-height:1.3;text-decoration:none;color:var(--tinta);
   transition:background-color .15s,color .15s;
 }
+.indice a span{flex:1}
+.indice__icono{flex:none;width:30px;height:30px}
 .indice a svg{width:16px;height:16px;flex:none;color:var(--ocre);transition:transform .15s,color .15s}
 .indice a:hover{background:var(--papel);color:var(--verde)}
 .indice a:hover svg{color:var(--verde);transform:translateY(2px)}
@@ -808,8 +866,8 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
 .bloque-area__cabecera{display:grid;gap:var(--e-5);align-items:center}
 @media (min-width:760px){.bloque-area__cabecera{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}}
 .bloque-area__foto{position:relative}
-.bloque-area__cabecera img{width:100%;border-radius:var(--radio-s);background:var(--papel-2)}
-.bloque-area__icono{display:none}
+.bloque-area__foto img{width:100%;border-radius:var(--radio-s);background:var(--papel-2)}
+.bloque-area__icono{display:block;width:56px;height:56px;margin-bottom:var(--e-3)}
 .bloque-area__cabecera h2{font-size:clamp(1.6rem,1.25rem + 1.3vw,2.15rem);margin:0 0 var(--e-2)}
 .bloque-area__cabecera p{color:var(--suave)}
 .bloque-area__servicios{display:grid;gap:0 var(--e-5);list-style:none;margin:var(--e-5) 0 0;padding:var(--e-3) 0 0;border-top:1px solid var(--linea)}

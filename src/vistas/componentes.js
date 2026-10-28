@@ -33,7 +33,9 @@ export const cabeceraSeccion = ({ etiqueta: et, icono, titulo, entradilla, id, c
     </div>`;
 
 // ---------------------------------------------------- Cabecera de página
-export const cabeceraPagina = ({ migas: m, etiqueta: et, icono = '', h1, entradilla, acciones = '', visual = '', area = '' }) => `<section class="cabecera-pagina${area ? ' area-' + area : ''}${visual ? ' cabecera-pagina--visual' : ''}">
+// Con «fondo», la cabecera lleva una imagen de fondo: la clase .cabecera--<fondo>
+// de estilos.css (cabecera-servicio es la clase común a todas las que tienen fondo).
+export const cabeceraPagina = ({ migas: m, etiqueta: et, icono = '', h1, entradilla, acciones = '', visual = '', area = '', fondo = '' }) => `<section class="cabecera-pagina${area ? ' area-' + area : ''}${visual ? ' cabecera-pagina--visual' : ''}${fondo ? ` cabecera-servicio cabecera--${fondo}` : ''}">
   <div class="contenedor cabecera-pagina__rejilla">
     <div>
       ${m ? migas(m) : ''}
@@ -59,8 +61,12 @@ export const imagen = (nombre, { alt = '', tamanos = '100vw', prioridad = false,
 // El alt ya lo dice en las fotos informativas; la nota es para quien las ve.
 export const notaIa = () => '<span class="nota-ia" aria-hidden="true">Imagen ilustrativa generada con IA</span>';
 
-export const ilustracion = (nombre, alt, { prioridad = false, clase = '', tamanos = '(min-width: 980px) 520px, 100vw' } = {}) =>
-  `<figure class="ilustracion ${clase}">${imagen(nombre, { alt, tamanos, prioridad })}${notaIa()}</figure>`;
+// Con «pie», la nota de IA va debajo de la foto (en las cabeceras) en lugar de encima.
+export const ilustracion = (nombre, alt, { prioridad = false, clase = '', tamanos = '(min-width: 980px) 520px, 100vw', pie = false } = {}) =>
+  `<figure class="ilustracion ${clase}">${imagen(nombre, { alt, tamanos, prioridad })}${pie ? '<figcaption class="ilustracion__pie">Imagen ilustrativa generada con IA</figcaption>' : notaIa()}</figure>`;
+
+// Icono propio de cada área (img/areas/<clave>.svg). Decorativo: el nombre va al lado.
+export const iconoArea = (area, clase) => `<img class="${clase}" src="${url(`img/areas/${area.clave}.svg`)}" alt="" width="64" height="64" loading="lazy" decoding="async">`;
 
 // ------------------------------------------------- Comparador antes/después
 export const comparador = ({ prioridad = true } = {}) => `<div class="comparador-marco">
@@ -80,6 +86,7 @@ export const comparador = ({ prioridad = true } = {}) => `<div class="comparador
 export const tarjetaArea = (area, { titulo = 'h3', destacada = false } = {}) => `<article class="tarjeta-area area-${area.clave}${destacada ? ' tarjeta-area--destacada' : ''}" data-revelar>
         <div class="tarjeta-area__imagen">${imagen(area.foto, { tamanos: '(min-width: 1000px) 400px, (min-width: 640px) 50vw, 100vw' })}${notaIa()}</div>
         <div class="tarjeta-area__cuerpo">
+          ${iconoArea(area, 'tarjeta-area__icono')}
           <${titulo}><a href="${url(RUTAS.area(area.id))}">${area.nombre}</a></${titulo}>
           <p>${area.resumen}</p>
           <ul class="tarjeta-area__lista">

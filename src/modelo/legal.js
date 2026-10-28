@@ -26,7 +26,7 @@ export const LEGALES = [
       <h2>Información orientativa</h2>
       <p>Las guías tienen carácter informativo y no constituyen asesoramiento jurídico. Los precios y condiciones de cada trabajo se fijan en el presupuesto correspondiente.</p>
       <h2>Propiedad intelectual</h2>
-      <p>Los textos, las imágenes, el logotipo y el diseño de esta web pertenecen a su titular o se usan con licencia. Las fotografías de los servicios son imágenes ilustrativas generadas con inteligencia artificial: no muestran trabajos reales ni a personas del equipo. Las tipografías Playfair Display y Figtree se distribuyen con licencia SIL Open Font License. Los datos del mapa proceden de OpenStreetMap (© colaboradores de OpenStreetMap, licencia ODbL).</p>
+      <p>Los textos, las imágenes, el logotipo y el diseño de esta web pertenecen a su titular o se usan con licencia. Las fotografías de los servicios y los fondos de las cabeceras son imágenes ilustrativas generadas con inteligencia artificial: no muestran trabajos reales ni a personas del equipo. Las tipografías Playfair Display y Figtree se distribuyen con licencia SIL Open Font License. Los datos del mapa proceden de OpenStreetMap (© colaboradores de OpenStreetMap, licencia ODbL).</p>
       <h2>Enlaces externos</h2>
       <p>La web enlaza a páginas de terceros, como WhatsApp o fuentes oficiales. El titular no se hace responsable de su contenido.</p>
       <h2>Legislación aplicable</h2>

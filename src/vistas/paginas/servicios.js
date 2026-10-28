@@ -1,13 +1,13 @@
 // VISTAS · Página de servicios (índice de áreas) y página de cada área.
 import { negocio } from '../../modelo/negocio.js';
 import { url, ic, RUTAS, enlazar } from '../utilidades.js';
-import { botonWa, botonTel, etiqueta, cabeceraPagina, cabeceraSeccion, comparador, ilustracion, imagen, notaIa, tarjetaArea, tarjetaServicio, calendarioIncendios, calendarioAnual, faq, llamada, tarjetaGuia } from '../componentes.js';
+import { botonWa, botonTel, etiqueta, cabeceraPagina, cabeceraSeccion, comparador, ilustracion, imagen, notaIa, iconoArea, tarjetaArea, tarjetaServicio, calendarioIncendios, calendarioAnual, faq, llamada, tarjetaGuia } from '../componentes.js';
 
 // --------------------------------------------------------- Índice de servicios
 export function vistaServicios({ areas }) {
   return cabeceraPagina({
     migas: [['Inicio', ''], ['Servicios']],
-    etiqueta: 'Servicios',
+    etiqueta: 'Servicios', fondo: 'servicios',
     h1: 'Servicios de limpieza, jardinería y mantenimiento',
     entradilla: 'Cinco áreas de trabajo para tu casa, tu jardín, tu parcela y tu segunda residencia en el Montsià. Puedes contratarlas por separado o combinarlas.',
     acciones: botonWa('Pedir presupuesto', { clase: 'boton--grande' }) + botonTel(negocio.telefonoVisible, 'boton--borde boton--grande'),
@@ -16,13 +16,14 @@ export function vistaServicios({ areas }) {
   <div class="contenedor">
     <nav class="indice" aria-label="Ir a un área">
       <ul>
-${areas.map(a => `        <li><a href="#${a.id}"><span>${a.nombre}</span>${ic('i-abajo')}</a></li>`).join('\n')}
+${areas.map(a => `        <li><a href="#${a.id}">${iconoArea(a, 'indice__icono')}<span>${a.nombre}</span>${ic('i-abajo')}</a></li>`).join('\n')}
       </ul>
     </nav>
 ${areas.map(a => `    <section class="bloque-area area-${a.clave}" id="${a.id}" aria-labelledby="t-${a.id}" data-revelar>
       <div class="bloque-area__cabecera">
         <div class="bloque-area__foto">${imagen(a.foto, { tamanos: '(min-width: 760px) 440px, 100vw' })}${notaIa()}</div>
         <div>
+          ${iconoArea(a, 'bloque-area__icono')}
           <h2 id="t-${a.id}">${a.nombre}</h2>
           <p>${a.entradilla}</p>
           <a class="boton boton--area" href="${url(RUTAS.area(a.id))}">Ver ${a.corto.toLowerCase()} ${ic('i-flecha')}</a>
@@ -55,7 +56,7 @@ ${llamada()}`;
 // ------------------------------------------------------------ Página de un área
 export function vistaArea({ area, relacionadas, guia, zonas }) {
   const mensaje = `Hola, CleanGreen. Quiero pedir presupuesto de ${area.nombre.toLowerCase()}.`;
-  const visual = area.comparador ? comparador() : ilustracion(area.foto, area.fotoAlt, { prioridad: true });
+  const visual = area.comparador ? comparador() : ilustracion(area.foto, area.fotoAlt, { prioridad: true, pie: true });
   let extra = '';
 
   if (area.clave === 'parcela') {
@@ -97,6 +98,7 @@ ${area.frecuencias.map(([t, d]) => `      <li data-revelar><strong>${t}</strong>
     acciones: botonWa('Presupuesto por WhatsApp', { mensaje, clase: 'boton--grande' }) + `<a class="boton boton--borde boton--grande" href="${url(RUTAS.contacto)}?servicio=${area.clave}">${ic('i-presupuesto')} Preparar el mensaje</a>`,
     visual,
     area: area.clave,
+    fondo: area.fondo,
   }) + `
 <section class="seccion area-${area.clave}" aria-labelledby="servicios-titulo">
   <div class="contenedor">

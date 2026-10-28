@@ -8,9 +8,10 @@ En su lugar:
 
 - **Una paleta corta** sacada del logo y del territorio.
 - **Filetes finos** de 1 px para separar, y un **filete doble** (fino arriba y grueso abajo) bajo cada cabecera, como el membrete de un documento.
-- **Una sola paleta para las cinco áreas**: cada una se reconoce por su foto y su nombre, no por un color propio.
+- **Una sola paleta para las cinco áreas**: cada una se reconoce por su foto, su icono y su nombre, no por un color propio.
 - **Fotografías enmarcadas como láminas**: paspartú marfil, esquinas rectas y un marco de filete desplazado en la foto destacada.
 - **Curvas de nivel** muy tenues de fondo: el relieve del Montsià como textura.
+- **Cabeceras con fondo fotográfico** claro: el motivo a la derecha y el texto a la izquierda, bajo un velo marfil.
 
 ## Referencias estudiadas
 
@@ -52,31 +53,43 @@ El verde de WhatsApp (`#25d366`) solo aparece en el glifo de WhatsApp de los bot
 
 ### Las cinco áreas comparten paleta
 
-Antes cada área tenía su color. Ahora las cinco comparten la misma paleta y la misma forma, y cada una se reconoce por su **foto y su nombre**. Es más sobrio y no depende del color, así que también funciona para quien no distingue bien los colores.
+Antes cada área tenía su color. Ahora las cinco comparten la misma paleta y la misma forma, y cada una se reconoce por su **foto, su icono y su nombre**. Es más sobrio y no depende del color, así que también funciona para quien no distingue bien los colores.
 
 ### Índice de servicios
 
-En la página de servicios, las cinco áreas se abren desde un panel de cinco botones iguales, separados por filetes de 1 px y con una flecha hacia abajo que indica que llevan a su apartado de la misma página. Son cinco columnas en el escritorio, dos en la tableta y una en el móvil.
+En la página de servicios, las cinco áreas se abren desde un panel de cinco botones iguales, separados por filetes de 1 px, con el icono del área a la izquierda y una flecha hacia abajo que indica que llevan a su apartado de la misma página. Son cinco columnas en el escritorio, dos en la tableta y una en el móvil.
+
+## Cabeceras con fondo
+
+Las páginas interiores (servicios y cada área, guías, zonas y contacto) abren con una imagen de fondo clara. Cada imagen tiene la parte izquierda vacía y el motivo a la derecha: llaves y libreta en servicios, un jardín en jardinería, un camino de tierra en parcelas… La lista completa está en [imagenes.md](imagenes.md).
+
+- **Escritorio:** el fondo cubre toda la cabecera, anclado a la derecha, con un velo marfil muy ligero. Si la página tiene foto o comparador, va a la derecha, enmarcada, con su pie debajo.
+- **Pantallas medianas (701 a 1279 px):** el motivo llega hasta el texto, así que el velo se refuerza detrás del texto (y es uniforme, al 84 %, por debajo de 980 px).
+- **Móvil:** se usa un recorte de la mitad derecha bajo un velo del 91 %. El fondo apenas se intuye y el texto se lee como sobre papel.
+- La portada no lleva fondo: su cabecera es el comparador antes/después sobre las curvas de nivel.
 
 ## Principios de la Gestalt aplicados
 
 | Principio | Qué dice | Dónde se ve en la web |
 |---|---|---|
 | **Proximidad** | Lo que está cerca se percibe como un grupo | Una escala de espacios (`--e-1` a `--e-8`): dentro de un componente, como mucho 16 px; entre componentes, de 24 a 48 px; entre secciones, de 64 a 120 px. En cada tarjeta de servicio, el icono, el título y el texto van juntos, y la lista de lo que incluye queda separada por un filete. |
-| **Semejanza** | Lo que se parece se percibe como relacionado | Lo que tiene la misma función tiene el mismo aspecto: todos los botones principales son verde Montsià, todas las etiquetas de sección van en versalitas ocre y los cinco accesos del índice de servicios son iguales. Las cinco áreas comparten forma y se reconocen por su foto y su nombre. |
+| **Semejanza** | Lo que se parece se percibe como relacionado | Lo que tiene la misma función tiene el mismo aspecto: todos los botones principales son verde Montsià, todas las etiquetas de sección van en versalitas ocre y los cinco accesos del índice de servicios son iguales. Las cinco áreas comparten forma y se reconocen por su foto, su icono y su nombre; los cinco iconos comparten trazo y colores. |
 | **Región común** | Lo que comparte un fondo o un borde forma un grupo | Las tarjetas, los paneles laterales de las guías y la «hoja de encargo» del presupuesto encierran lo que va junto en una superficie marfil con un filete de 1 px. |
 | **Continuidad** | El ojo sigue líneas y alineaciones | Los cuatro pasos de «Cómo trabajamos» están unidos por un filete ocre. Todo se alinea a la misma rejilla y al mismo margen izquierdo; con cuatro servicios, la rejilla pasa a dos columnas para que no quede una tarjeta suelta. |
 | **Cierre** | Completamos mentalmente las formas abiertas | El comparador antes/después muestra media foto de cada momento y se completa al deslizar. El marco de filete desplazado detrás de la foto de segundas residencias se lee como un rectángulo completo aunque la foto lo tape. |
-| **Figura-fondo** | Distinguimos lo que destaca de lo que está detrás | Bandas verde bosque que separan bloques; fotos con paspartú que se despegan del papel; una sola llamada principal en cada pantalla. |
+| **Figura-fondo** | Distinguimos lo que destaca de lo que está detrás | Bandas verde bosque que separan bloques; fotos con paspartú que se despegan del papel; fondos de cabecera claros y velados, que quedan detrás del texto sin competir con él; una sola llamada principal en cada pantalla. |
 | **Pregnancia y punto focal** | Preferimos las formas simples; un elemento domina | Formas rectas y simples (rectángulos de esquinas mínimas y filetes) y, en cada sección, un único elemento dominante: el título en Playfair Display. |
 
 ## Iconos
 
-Dibujo de línea de 1,4 px sobre una rejilla de 24 px, en un solo color y **sin fondo**: nada de cuadrados de color detrás. Están todos en `src/publico/img/iconos.svg`. Para encargar un juego nuevo y más personal, hay un prompt preparado en [prompt-iconos.md](prompt-iconos.md).
+Hay dos juegos, los dos **sin fondo**: nada de cuadrados de color detrás.
+
+- **Iconos de las áreas** (`src/publico/img/areas/`): cinco dibujos de 64 × 64 px aportados por el propietario, en verde oscuro con detalles en el verde agua del logo (`#00977a`). Identifican cada área en las tarjetas de la portada, en el índice y los bloques de servicios y en el submenú. Son decorativos (`alt=""`), porque el nombre del área va siempre al lado.
+- **Iconos de la interfaz y de cada servicio** (`src/publico/img/iconos.svg`): dibujo de línea de 1,4 px sobre una rejilla de 24 px, en un solo color. Para encargar un juego nuevo y más personal, hay un prompt preparado en [prompt-iconos.md](prompt-iconos.md).
 
 ## Imágenes
 
-Las fotos son **imágenes ilustrativas generadas con IA** y lo dicen: cada una lleva la nota «Imagen ilustrativa generada con IA» y su texto alternativo empieza igual. No se usan fotos de personas generadas con IA, para que nadie las confunda con el equipo real. Más detalles en [imagenes.md](imagenes.md).
+Las fotos son **imágenes ilustrativas generadas con IA** y lo dicen: cada una lleva la nota «Imagen ilustrativa generada con IA» y su texto alternativo empieza igual. Los fondos de las cabeceras también son de IA; como son decorativos, lo explica el aviso legal. No se usan fotos de personas generadas con IA, para que nadie las confunda con el equipo real. Más detalles en [imagenes.md](imagenes.md).
 
 ## Accesibilidad
 

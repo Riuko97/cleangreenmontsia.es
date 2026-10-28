@@ -6,7 +6,7 @@ import { botonWa, botonTel, etiqueta, cabeceraPagina, tarjetaArea, faq, llamada,
 export function vistaZonas({ zonas, otrosPueblos }) {
   return cabeceraPagina({
     migas: [['Inicio', ''], ['Zonas']],
-    etiqueta: 'Zonas', icono: 'i-ubicacion',
+    etiqueta: 'Zonas', icono: 'i-ubicacion', fondo: 'zonas',
     h1: 'Dónde trabajamos en el Montsià',
     entradilla: 'Trabajamos sobre todo en Amposta, Alcanar y Sant Carles de la Ràpita, y también en los alrededores.',
     acciones: botonWa('Consultar mi zona', { mensaje: 'Hola, CleanGreen. ¿Trabajáis en mi zona?', clase: 'boton--grande' }),
@@ -38,7 +38,7 @@ export function vistaZona({ zona, destacadas, otras }) {
   const mensaje = `Hola, CleanGreen. Quiero pedir presupuesto en ${zona.nombreLargo || zona.nombre}.`;
   return cabeceraPagina({
     migas: [['Inicio', ''], ['Zonas', RUTAS.zonas], [zona.nombre]],
-    etiqueta: `${zona.nombreLargo || zona.nombre} · Montsià`, icono: 'i-ubicacion',
+    etiqueta: `${zona.nombreLargo || zona.nombre} · Montsià`, icono: 'i-ubicacion', fondo: 'zonas',
     h1: zona.h1,
     entradilla: zona.entradilla,
     acciones: botonWa('Presupuesto por WhatsApp', { mensaje, clase: 'boton--grande' }) + botonTel(negocio.telefonoVisible, 'boton--borde boton--grande'),

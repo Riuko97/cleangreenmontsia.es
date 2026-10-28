@@ -49,6 +49,7 @@ Se generan en `src/controlador/seo.js` y se asignan a cada página en `rutas.js`
 
 - [x] **Nada de terceros:** ni fuentes de Google, ni librerías, ni analítica. Todo sale del mismo dominio.
 - [x] **Fotos optimizadas:** AVIF con respaldo WebP, en 640, 960 y 1280 px, con `srcset` y `sizes` para que cada pantalla descargue solo lo que necesita; `width` y `height` para que no salte el contenido; `loading="lazy"` fuera de la primera pantalla y `fetchpriority="high"` en la del comparador de portada.
+- [x] **Fondos de las cabeceras** en AVIF con respaldo WebP, a 1440 y 1920 px, más un recorte de 640 px para el móvil. Son lo más grande de la primera pantalla (el LCP), así que cada página precarga en el `<head>` la versión justa para su ancho (`<link rel="preload">` con las mismas media queries que el CSS): el navegador la pide a la vez que la hoja de estilos y no descarga ninguna otra.
 - [x] **Tipografías** propias, recortadas y precargadas (`preload`), con `font-display: swap`.
 - [x] **Una hoja de estilos y JavaScript en módulos**, con huella en la URL (`?v=…`) para que el navegador no use versiones viejas.
 - [x] **HTML minificado** al construir.

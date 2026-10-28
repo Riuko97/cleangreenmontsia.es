@@ -4,12 +4,25 @@ import { AREAS } from '../modelo/servicios.js';
 import { ZONAS } from '../modelo/zonas.js';
 import { GUIAS } from '../modelo/guias.js';
 import { url, absoluta, wa, tel, sinCortes, ic, esc, RUTAS } from './utilidades.js';
+import { iconoArea } from './componentes.js';
 
 // Script mínimo en línea: marca que hay JavaScript antes de pintar (evita saltos).
 // Su huella SHA-256 se declara en la política de seguridad (CSP).
 export const SCRIPT_JS = "document.documentElement.className='js'";
 
-function cabeza({ meta, recursos }) {
+// El fondo de la cabecera es lo más grande de la primera pantalla (el LCP), pero
+// el navegador no lo descubre hasta leer el CSS. Se precarga la misma versión AVIF
+// que elige estilos.css en cada ancho, con las mismas media queries; los
+// navegadores sin AVIF ignoran la precarga y usan el WebP.
+const VERSIONES_FONDO = [
+  ['(max-width: 700px)', 'movil-640'],
+  ['(min-width: 701px) and (max-width: 1440px)', '1440'],
+  ['(min-width: 1441px)', '1920'],
+];
+const precargaFondo = fondo => VERSIONES_FONDO.map(([media, version]) =>
+  `<link rel="preload" href="${url(`img/fondos/${fondo}-${version}.avif`)}" as="image" type="image/avif" media="${media}" fetchpriority="high">\n`).join('');
+
+function cabeza({ meta, recursos, fondo }) {
   const canonica = absoluta(meta.ruta);
   const imagen = absoluta(meta.imagen || 'img/og/inicio.jpg');
   return `<!DOCTYPE html>
@@ -34,7 +47,7 @@ ${meta.indexar === false ? '' : `<link rel="canonical" href="${canonica}">
 <link rel="manifest" href="${url('site.webmanifest')}">
 <link rel="preload" href="${url('fonts/playfair-display.woff2')}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${url('fonts/figtree.woff2')}" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="${recursos.css}">
+${fondo ? precargaFondo(fondo) : ''}<link rel="stylesheet" href="${recursos.css}">
 <script>${SCRIPT_JS}</script>
 <script type="module" src="${recursos.js}"></script>
 <meta property="og:type" content="${meta.tipoOG || 'website'}">
@@ -69,7 +82,7 @@ function cabecera(activa) {
           <a href="${url(RUTAS.servicios)}"${actual(RUTAS.servicios)}${enServicios && activa !== RUTAS.servicios ? ' class="nav__activo"' : ''}>Servicios</a>
           <button class="nav__desplegar" type="button" aria-expanded="false" aria-controls="submenu-servicios"><span class="visualmente-oculto">Ver las áreas de servicio</span>${ic('i-abajo')}</button>
           <ul class="submenu" id="submenu-servicios">
-${AREAS.map(a => `            <li class="area-${a.clave}"><a href="${url(RUTAS.area(a.id))}"${actual(RUTAS.area(a.id))}><span><strong>${a.nombre}</strong><small>${a.sub}</small></span></a></li>`).join('\n')}
+${AREAS.map(a => `            <li class="area-${a.clave}"><a href="${url(RUTAS.area(a.id))}"${actual(RUTAS.area(a.id))}>${iconoArea(a, 'submenu__icono')}<span><strong>${a.nombre}</strong><small>${a.sub}</small></span></a></li>`).join('\n')}
           </ul>
         </li>
         <li><a href="${url(RUTAS.area('segundas-residencias'))}"${actual(RUTAS.area('segundas-residencias'))}>Segundas residencias</a></li>
@@ -140,6 +153,8 @@ ${GUIAS.map(g => `          <li><a href="${url(RUTAS.guia(g.id))}">${g.titulo}</
 }
 
 // Documento completo. `activa` es la ruta de la página para marcar el menú.
+// El fondo de la cabecera se lee de su clase .cabecera--<fondo>, que pone cabeceraPagina.
 export function documento({ meta, cuerpo, recursos }) {
-  return cabeza({ meta, recursos }) + cabecera(meta.ruta) + `<main id="contenido">\n${cuerpo}\n</main>\n` + pie();
+  const fondo = cuerpo.match(/\bcabecera--([a-z-]+)/)?.[1];
+  return cabeza({ meta, recursos, fondo }) + cabecera(meta.ruta) + `<main id="contenido">\n${cuerpo}\n</main>\n` + pie();
 }
