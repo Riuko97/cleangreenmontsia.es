@@ -102,7 +102,7 @@ export const AREAS = [
     corto: 'Parcelas y terrenos',
     titulo: 'Desbroce y limpieza de parcelas y terrenos',
     h1: 'Desbroce y limpieza de parcelas en el Montsià',
-    descripcion: 'Desbroce de parcelas, solares y terrenos: hierba alta, zarzas, cañas y matorral, con retirada de restos. Alcanar, Amposta y La Ràpita. Presupuesto sin compromiso.',
+    descripcion: 'Desbroce de parcelas, solares y terrenos: hierba alta, zarzas y matorral, con retirada de restos. Alcanar, Amposta y La Ràpita. Presupuesto sin compromiso.',
     resumen: 'Desbroce de hierba alta, zarzas y matorral, limpieza de solares, vegetación invasiva y retirada de restos.',
     entradilla: 'Quitamos la hierba alta, las zarzas, las cañas y el matorral, retiramos los restos y dejamos el terreno limpio y seguro, también antes del verano.',
     parrafos: [
@@ -149,7 +149,7 @@ export const AREAS = [
     corto: 'Segundas residencias',
     titulo: 'Cuidado y mantenimiento de segundas residencias',
     h1: 'Cuidado de segundas residencias en el Montsià',
-    descripcion: 'Revisiones, casa lista antes de tu llegada, cierre de temporada y mantenimiento del jardín y la parcela de tu segunda residencia en Alcanar, Amposta y La Ràpita.',
+    descripcion: 'Revisiones, casa lista antes de tu llegada, cierre de temporada y cuidado del jardín y la parcela de tu segunda residencia en Alcanar, Amposta y La Ràpita.',
     resumen: 'Revisiones de la vivienda, casa lista antes de tu llegada, cierre de temporada y jardín y parcela cuidados mientras no estás.',
     entradilla: 'Tu casa, cuidada aunque estés lejos. La revisamos, la preparamos antes de que llegues, la dejamos en orden cuando te vas y mantenemos el jardín y la parcela.',
     parrafos: [

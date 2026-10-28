@@ -42,7 +42,7 @@ export function rutas() {
     ruta: RUTAS.servicios, prioridad: '0.9',
     meta: {
       titulo: marca('Servicios para casa, jardín y parcela'),
-      descripcion: 'Limpieza de casas y pisos, jardinería, desbroce de parcelas, cuidado de segundas residencias y mantenimiento periódico en el Montsià. Presupuesto sin compromiso.',
+      descripcion: 'Limpieza de casas y pisos, jardinería, desbroce de parcelas, segundas residencias y mantenimiento periódico en el Montsià. Presupuesto sin compromiso.',
     },
     cuerpo: () => vistaServicios({ areas: AREAS }),
     jsonld: m => [seo.negocioLD(), seo.paginaLD({ ruta: RUTAS.servicios, titulo: m.titulo, descripcion: m.descripcion, tipo: 'CollectionPage' }),

@@ -20,6 +20,8 @@ export const RUTAS = {
 
 export const wa = (texto = mensajes.whatsapp) => `https://wa.me/${negocio.whatsapp}?text=${encodeURIComponent(texto)}`;
 export const tel = () => `tel:${negocio.telefono}`;
+// Texto de los enlaces de llamada sin saltos de línea dentro del número.
+export const sinCortes = t => t.replace(/ /g, '&nbsp;');
 
 export const ic = (id, clase = '') => `<svg class="icono${clase ? ' ' + clase : ''}" aria-hidden="true" focusable="false"><use href="${url('img/iconos.svg')}#${id}"></use></svg>`;
 

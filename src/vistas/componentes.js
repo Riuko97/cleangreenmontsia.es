@@ -2,13 +2,13 @@
 import fs from 'node:fs';
 import { negocio } from '../modelo/negocio.js';
 import { PUEBLOS_FORMULARIO } from '../modelo/zonas.js';
-import { url, wa, tel, ic, RUTAS, enlazar, esc } from './utilidades.js';
+import { url, wa, tel, sinCortes, ic, RUTAS, enlazar, esc } from './utilidades.js';
 
 // ---------------------------------------------------------------- Botones
 export const botonWa = (texto = 'Presupuesto por WhatsApp', { mensaje, clase = '' } = {}) =>
   `<a class="boton boton--wa ${clase}" href="${wa(mensaje)}" target="_blank" rel="noopener">${ic('i-whatsapp')} ${texto}</a>`;
 export const botonTel = (texto = negocio.telefonoVisible, clase = 'boton--borde') =>
-  `<a class="boton ${clase}" href="${tel()}">${ic('i-telefono')} ${texto}</a>`;
+  `<a class="boton ${clase}" href="${tel()}">${ic('i-telefono')} ${sinCortes(texto)}</a>`;
 
 export const etiqueta = (texto, icono = 'i-destello') => `<p class="etiqueta">${ic(icono)} ${texto}</p>`;
 

@@ -47,7 +47,7 @@ export const ZONAS = [
     id: 'la-rapita',
     nombre: 'La Ràpita',
     nombreLargo: 'Sant Carles de la Ràpita',
-    titulo: 'Limpieza y jardinería en Sant Carles de la Ràpita',
+    titulo: 'Limpieza y jardinería en La Ràpita',
     h1: 'Limpieza, jardinería y mantenimiento en La Ràpita',
     descripcion: 'Limpieza de pisos y casas, jardinería, desbroce de parcelas y cuidado de segundas residencias en Sant Carles de la Ràpita. Presupuesto sin compromiso.',
     entradilla: 'Limpieza de pisos y casas, jardinería, desbroce y cuidado de segundas residencias en Sant Carles de la Ràpita.',

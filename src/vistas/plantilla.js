@@ -3,7 +3,7 @@ import { negocio, sitio } from '../modelo/negocio.js';
 import { AREAS } from '../modelo/servicios.js';
 import { ZONAS } from '../modelo/zonas.js';
 import { GUIAS } from '../modelo/guias.js';
-import { url, absoluta, wa, tel, ic, esc, RUTAS } from './utilidades.js';
+import { url, absoluta, wa, tel, sinCortes, ic, esc, RUTAS } from './utilidades.js';
 
 // Script mínimo en línea: marca que hay JavaScript antes de pintar (evita saltos).
 // Su huella SHA-256 se declara en la política de seguridad (CSP).
@@ -12,7 +12,7 @@ export const SCRIPT_JS = "document.documentElement.className='js'";
 function cabeza({ meta, recursos }) {
   const canonica = absoluta(meta.ruta);
   const imagen = absoluta(meta.imagen || 'img/og/inicio.jpg');
-  return `<!doctype html>
+  return `<!DOCTYPE html>
 <html lang="es-ES" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -79,7 +79,7 @@ ${AREAS.map(a => `            <li class="area-${a.clave}"><a href="${url(RUTAS.a
       </ul>
       <div class="nav__extra">
         <a class="boton boton--wa" href="${wa()}" target="_blank" rel="noopener">${ic('i-whatsapp')} Presupuesto por WhatsApp</a>
-        <a class="boton boton--borde" href="${tel()}">${ic('i-telefono')} Llamar al ${negocio.telefonoVisible}</a>
+        <a class="boton boton--borde" href="${tel()}">${ic('i-telefono')} ${sinCortes('Llamar al ' + negocio.telefonoVisible)}</a>
       </div>
     </nav>
     <a class="boton boton--wa cabecera__cta" href="${wa()}" target="_blank" rel="noopener">${ic('i-whatsapp')} Presupuesto</a>
@@ -115,7 +115,7 @@ ${GUIAS.map(g => `          <li><a href="${url(RUTAS.guia(g.id))}">${g.titulo}</
         <h2>Contacto</h2>
         <ul>
           <li><a href="${wa()}" target="_blank" rel="noopener">${ic('i-whatsapp')} WhatsApp</a></li>
-          <li><a href="${tel()}">${ic('i-telefono')} ${negocio.telefonoVisible}</a></li>
+          <li><a href="${tel()}">${ic('i-telefono')} ${sinCortes(negocio.telefonoVisible)}</a></li>
           <li><a href="${url(RUTAS.contacto)}">${ic('i-presupuesto')} Pedir presupuesto</a></li>
         </ul>
       </div>
