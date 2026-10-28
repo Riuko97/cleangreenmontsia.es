@@ -1,7 +1,7 @@
 // VISTAS · Página de servicios (índice de áreas) y página de cada área.
 import { negocio } from '../../modelo/negocio.js';
 import { url, ic, RUTAS, enlazar } from '../utilidades.js';
-import { botonWa, botonTel, etiqueta, cabeceraPagina, cabeceraSeccion, comparador, ilustracion, imagen, notaIa, tarjetaArea, tarjetaServicio, calendarioIncendios, calendarioAnual, faq, llamada, tarjetaGuia } from '../componentes.js';
+import { botonWa, botonTel, etiqueta, cabeceraPagina, cabeceraSeccion, comparador, ilustracion, imagen, notaIa, numeroArea, tarjetaArea, tarjetaServicio, calendarioIncendios, calendarioAnual, faq, llamada, tarjetaGuia } from '../componentes.js';
 
 // --------------------------------------------------------- Índice de servicios
 export function vistaServicios({ areas }) {
@@ -16,14 +16,14 @@ export function vistaServicios({ areas }) {
   <div class="contenedor">
     <nav class="indice" aria-label="Ir a un área">
       <ul>
-${areas.map(a => `        <li class="area-${a.clave}"><a href="#${a.id}">${ic(a.icono)} ${a.nombre}</a></li>`).join('\n')}
+${areas.map(a => `        <li class="area-${a.clave}"><a href="#${a.id}"><span aria-hidden="true">${numeroArea(a)}</span> ${a.nombre}</a></li>`).join('\n')}
       </ul>
     </nav>
 ${areas.map(a => `    <section class="bloque-area area-${a.clave}" id="${a.id}" aria-labelledby="t-${a.id}" data-revelar>
       <div class="bloque-area__cabecera">
         <div class="bloque-area__foto">${imagen(a.foto, { tamanos: '(min-width: 760px) 440px, 100vw' })}${notaIa()}</div>
         <div>
-          <span class="bloque-area__icono">${ic(a.icono)}</span>
+          <span class="bloque-area__num" aria-hidden="true">${numeroArea(a)}</span>
           <h2 id="t-${a.id}">${a.nombre}</h2>
           <p>${a.entradilla}</p>
           <a class="boton boton--area" href="${url(RUTAS.area(a.id))}">Ver ${a.corto.toLowerCase()} ${ic('i-flecha')}</a>

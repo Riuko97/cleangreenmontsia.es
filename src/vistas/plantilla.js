@@ -69,7 +69,7 @@ function cabecera(activa) {
           <a href="${url(RUTAS.servicios)}"${actual(RUTAS.servicios)}${enServicios && activa !== RUTAS.servicios ? ' class="nav__activo"' : ''}>Servicios</a>
           <button class="nav__desplegar" type="button" aria-expanded="false" aria-controls="submenu-servicios"><span class="visualmente-oculto">Ver las áreas de servicio</span>${ic('i-abajo')}</button>
           <ul class="submenu" id="submenu-servicios">
-${AREAS.map(a => `            <li class="area-${a.clave}"><a href="${url(RUTAS.area(a.id))}"${actual(RUTAS.area(a.id))}>${ic(a.icono)}<span><strong>${a.nombre}</strong><small>${a.sub}</small></span></a></li>`).join('\n')}
+${AREAS.map((a, i) => `            <li class="area-${a.clave}"><a href="${url(RUTAS.area(a.id))}"${actual(RUTAS.area(a.id))}><span class="submenu__num" aria-hidden="true">0${i + 1}</span><span><strong>${a.nombre}</strong><small>${a.sub}</small></span></a></li>`).join('\n')}
           </ul>
         </li>
         <li><a href="${url(RUTAS.area('segundas-residencias'))}"${actual(RUTAS.area('segundas-residencias'))}>Segundas residencias</a></li>

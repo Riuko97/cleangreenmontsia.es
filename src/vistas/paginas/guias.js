@@ -24,7 +24,7 @@ const bloque = b => {
     case 'h2': return `<h2>${b.texto}</h2>`;
     case 'p': return `<p>${enlazar(b.html)}</p>`;
     case 'aviso': return `<div class="nota nota--aviso">${ic('i-aviso')}<p>${b.html}</p></div>`;
-    case 'nota': return `<div class="nota">${ic(b.icono || 'i-destello')}<p>${enlazar(b.html)}</p></div>`;
+    case 'nota': return `<div class="nota">${ic(b.icono || 'i-aviso')}<p>${enlazar(b.html)}</p></div>`;
     case 'resumen': return `<ul class="resumen">${b.items.map(([i, h]) => `<li>${ic(i)}<span>${h}</span></li>`).join('')}</ul>`;
     case 'checklist': return `<ul class="checklist">${b.items.map(t => `<li>${ic('i-check')}<span>${enlazar(t)}</span></li>`).join('')}</ul>`;
     case 'calendario': return calendarioIncendios();

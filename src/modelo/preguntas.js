@@ -14,7 +14,7 @@ export const PASOS = [
   { icono: 'i-whatsapp', titulo: 'Escríbenos', texto: 'Cuéntanos qué necesitas por WhatsApp y mándanos 2 o 3 fotos y la ubicación.' },
   { icono: 'i-ojo', titulo: 'Lo valoramos', texto: 'Con las fotos nos hacemos una idea. Si hace falta, quedamos para verlo en persona.' },
   { icono: 'i-presupuesto', titulo: 'Presupuesto', texto: 'Te decimos qué haremos y cuánto cuesta, sin compromiso.' },
-  { icono: 'i-destello', titulo: 'Trabajo hecho', texto: 'Hacemos el trabajo y, si quieres, lo repetimos con la frecuencia que elijas.' },
+  { icono: 'i-check', titulo: 'Trabajo hecho', texto: 'Hacemos el trabajo y, si quieres, lo repetimos con la frecuencia que elijas.' },
 ];
 
 export const VALORES = [

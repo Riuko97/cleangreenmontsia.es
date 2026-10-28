@@ -93,7 +93,8 @@ La web se publica sola con GitHub Actions (`.github/workflows/publicar.yml`) cad
 
 ## Documentación
 
-- [docs/diseno.md](docs/diseno.md): tipografía, color por áreas y principios de la Gestalt aplicados.
+- [docs/diseno.md](docs/diseno.md): dirección de diseño, tipografía, paleta, numeración de las áreas y principios de la Gestalt aplicados.
+- [docs/prompt-iconos.md](docs/prompt-iconos.md): prompt para encargar a ChatGPT un juego de iconos nuevo.
 - [docs/seo.md](docs/seo.md): todo el SEO técnico implementado.
 - [docs/dominio.md](docs/dominio.md): qué dominio comprar, dónde y cómo conectarlo.
 - [docs/imagenes.md](docs/imagenes.md): fotos, imágenes para compartir y cómo cambiarlas.

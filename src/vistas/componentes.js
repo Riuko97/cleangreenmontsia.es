@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import { negocio } from '../modelo/negocio.js';
 import { PUEBLOS_FORMULARIO } from '../modelo/zonas.js';
+import { AREAS } from '../modelo/servicios.js';
 import { url, wa, tel, sinCortes, ic, RUTAS, enlazar, esc } from './utilidades.js';
 
 // ---------------------------------------------------------------- Botones
@@ -10,7 +11,11 @@ export const botonWa = (texto = 'Presupuesto por WhatsApp', { mensaje, clase = '
 export const botonTel = (texto = negocio.telefonoVisible, clase = 'boton--borde') =>
   `<a class="boton ${clase}" href="${tel()}">${ic('i-telefono')} ${sinCortes(texto)}</a>`;
 
-export const etiqueta = (texto, icono = 'i-destello') => `<p class="etiqueta">${ic(icono)} ${texto}</p>`;
+// Etiqueta de sección en versalitas, sin icono (estilo formal).
+export const etiqueta = texto => `<p class="etiqueta">${texto}</p>`;
+
+// Número de cada área (01-05): las distingue la tipografía, no un color.
+export const numeroArea = area => String(AREAS.findIndex(a => a.id === area.id) + 1).padStart(2, '0');
 
 // ------------------------------------------------------------------ Migas
 export const migas = items => `<nav class="migas" aria-label="Estás aquí"><ol>${items.map(([t, h], i) =>
@@ -32,7 +37,7 @@ export const cabeceraSeccion = ({ etiqueta: et, icono, titulo, entradilla, id, c
     </div>`;
 
 // ---------------------------------------------------- Cabecera de página
-export const cabeceraPagina = ({ migas: m, etiqueta: et, icono = 'i-destello', h1, entradilla, acciones = '', visual = '', area = '' }) => `<section class="cabecera-pagina${area ? ' area-' + area : ''}${visual ? ' cabecera-pagina--visual' : ''}">
+export const cabeceraPagina = ({ migas: m, etiqueta: et, icono = '', h1, entradilla, acciones = '', visual = '', area = '' }) => `<section class="cabecera-pagina${area ? ' area-' + area : ''}${visual ? ' cabecera-pagina--visual' : ''}">
   <div class="contenedor cabecera-pagina__rejilla">
     <div>
       ${m ? migas(m) : ''}
@@ -79,7 +84,7 @@ export const comparador = ({ prioridad = true } = {}) => `<div class="comparador
 export const tarjetaArea = (area, { titulo = 'h3', destacada = false } = {}) => `<article class="tarjeta-area area-${area.clave}${destacada ? ' tarjeta-area--destacada' : ''}" data-revelar>
         <div class="tarjeta-area__imagen">${imagen(area.foto, { tamanos: '(min-width: 1000px) 400px, (min-width: 640px) 50vw, 100vw' })}${notaIa()}</div>
         <div class="tarjeta-area__cuerpo">
-          <span class="tarjeta-area__icono">${ic(area.icono)}</span>
+          <span class="tarjeta-area__num" aria-hidden="true">${numeroArea(area)}</span>
           <${titulo}><a href="${url(RUTAS.area(area.id))}">${area.nombre}</a></${titulo}>
           <p>${area.resumen}</p>
           <ul class="tarjeta-area__lista">
@@ -91,7 +96,7 @@ ${area.servicios.slice(0, 3).map(s => `            <li>${ic('i-check')} ${s.nomb
 
 // ------------------------------------------------- Tarjeta de servicio
 export const tarjetaServicio = (s, { enlace } = {}) => `<article class="servicio" id="${s.id}" data-revelar>
-        <span class="servicio__icono">${ic(s.icono || 'i-destello')}</span>
+        <span class="servicio__icono">${ic(s.icono || 'i-hoja')}</span>
         <h3>${enlace ? `<a href="${enlace}">${s.nombre}</a>` : s.nombre}</h3>
         <p>${s.texto}</p>
         ${s.incluye ? `<ul class="servicio__incluye">
@@ -137,7 +142,6 @@ ${calendario.map((c, i) => `      <li class="estacion estacion--${i + 1}" data-r
 export const llamada = ({ titulo = '¿Hablamos de tu casa, tu jardín o tu parcela?', texto = 'Escríbenos por WhatsApp con lo que necesitas y, si puedes, 2 o 3 fotos. Te respondemos con un presupuesto sin compromiso.', mensaje } = {}) => `<section class="seccion seccion--llamada" aria-labelledby="llamada-titulo">
   <div class="contenedor">
     <div class="llamada" data-revelar>
-      <svg class="llamada__destello" viewBox="0 0 24 24" aria-hidden="true"><use href="${url('img/iconos.svg')}#i-destello"></use></svg>
       <h2 id="llamada-titulo">${titulo}</h2>
       <p>${texto}</p>
       <div class="acciones">
@@ -257,7 +261,7 @@ export const mapa = () => {
 
 // ------------------------------------------------------------ Otras piezas
 export const tarjetaGuia = (g, { titulo = 'h3' } = {}) => `<article class="tarjeta-guia area-${g.claveArea}" data-revelar>
-        <span class="tarjeta-guia__icono">${ic(g.icono)}</span>
+        <p class="tarjeta-guia__tipo">Guía para propietarios</p>
         <${titulo}><a href="${url(RUTAS.guia(g.id))}">${g.titulo}</a></${titulo}>
         <p>${g.resumen}</p>
         <span class="tarjeta-guia__mas">Leer la guía ${ic('i-flecha')}</span>

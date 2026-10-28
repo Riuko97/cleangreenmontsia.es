@@ -19,44 +19,46 @@ const DESTINO = path.join(PUBLICO, 'img/og');
 const datos = (archivo, tipo) => `data:${tipo};base64,${fs.readFileSync(path.join(PUBLICO, archivo)).toString('base64')}`;
 const foto = nombre => datos(`img/fotos/${nombre}-960.webp`, 'image/webp');
 
-// Mismos colores que el sistema de áreas de estilos.css
-const COLOR = { hogar: '#2c6e8f', jardin: '#3f7d4e', parcela: '#b07a2a', residencia: '#b85c38', mantenimiento: '#00977a' };
-
+// Etiqueta superior: el número del área (01-05) y su nombre, como en la web.
 const tarjetas = [
-  { archivo: 'inicio', titulo: 'Limpieza, jardinería y mantenimiento en el Montsià', color: '#00977a',
+  { archivo: 'inicio', etiqueta: 'Montsià · Terres de l’Ebre', titulo: 'Limpieza, jardinería y mantenimiento en el Montsià',
     visual: `<div class="mosaico">${['hogar', 'jardin', 'parcela-despues', 'residencia'].map(f => `<img src="${foto(f)}" alt="">`).join('')}</div>` },
-  ...AREAS.map(a => ({
-    archivo: a.clave, titulo: a.titulo, color: COLOR[a.clave],
+  ...AREAS.map((a, i) => ({
+    archivo: a.clave, etiqueta: `0${i + 1} · ${a.corto}`, titulo: a.titulo,
     visual: a.clave === 'parcela'
       ? `<div class="partida"><img src="${foto('parcela-antes')}" alt=""><img src="${foto('parcela-despues')}" alt=""><span class="et et--antes">Antes</span><span class="et et--despues">Después</span></div>`
       : `<img class="unica" src="${foto(a.foto)}" alt="">`,
   })),
 ];
 
+// Misma paleta que estilos.css: marfil, tinta, verde Montsià y ocre.
 const plantilla = t => `<!doctype html><html lang="es"><head><meta charset="utf-8"><style>
 @font-face{font-family:Playfair;src:url(${datos('fonts/playfair-display.woff2', 'font/woff2')}) format('woff2');font-weight:600 800}
 @font-face{font-family:Figtree;src:url(${datos('fonts/figtree.woff2', 'font/woff2')}) format('woff2');font-weight:300 900}
 *{box-sizing:border-box;margin:0}
-body{width:1200px;height:630px;overflow:hidden;background:#fbf7ef;font-family:Figtree;color:#03241c;display:grid;grid-template-columns:1fr 520px;gap:48px;padding:56px 56px 56px 72px;position:relative}
-body::before{content:"";position:absolute;left:0;top:0;bottom:0;width:14px;background:${t.color}}
-.texto{display:flex;flex-direction:column;justify-content:space-between}
-.logo{height:62px;width:auto;align-self:flex-start}
-h1{font-family:Playfair;font-weight:700;font-size:${t.titulo.length > 44 ? 54 : 62}px;line-height:1.08;letter-spacing:-.01em}
-.pie{display:flex;flex-direction:column;gap:18px}
-.pildora{align-self:flex-start;background:#00735d;color:#fff;font-weight:700;font-size:24px;padding:12px 26px;border-radius:999px}
-.zona{font-size:22px;font-weight:600;color:#4d5a52;letter-spacing:.02em}
-.visual{position:relative;border-radius:28px;overflow:hidden;border:8px solid #fff;box-shadow:0 18px 40px rgba(3,36,28,.18);background:#f4ecdc}
+body{width:1200px;height:630px;overflow:hidden;background:#f6f3ec url(${datos('img/topo.svg', 'image/svg+xml')}) center/cover no-repeat;font-family:Figtree;color:#18241f;display:grid;grid-template-columns:1fr 500px;gap:56px;padding:60px 64px}
+.texto{display:flex;flex-direction:column}
+.logo{height:56px;width:auto;align-self:flex-start;margin-bottom:auto}
+.etiqueta{font-size:17px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#765a2c;margin:0 0 16px}
+h1{font-family:Playfair;font-weight:600;font-size:${t.titulo.length > 44 ? 50 : 58}px;line-height:1.1;letter-spacing:-.01em;margin-bottom:30px}
+.filete{height:6px;margin-bottom:26px;background:linear-gradient(#1f4a3d,#1f4a3d) top/100% 1px no-repeat,linear-gradient(#1f4a3d,#1f4a3d) bottom/100% 3px no-repeat}
+.pie{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.boton{background:#1f4a3d;color:#fff;font-weight:650;font-size:21px;padding:12px 22px;border-radius:3px;white-space:nowrap}
+.zona{font-size:19px;font-weight:600;color:#4c5750}
+.visual{position:relative;overflow:hidden;border:10px solid #fffdf8;border-radius:2px;box-shadow:0 0 0 1px #d8cfbf,0 22px 48px rgba(24,36,31,.16);background:#ede7db}
 .visual img{display:block;width:100%;height:100%;object-fit:cover}
-.mosaico{display:grid;grid-template-columns:1fr 1fr;gap:6px;height:100%;background:#fff}
-.partida{display:grid;grid-template-columns:1fr 1fr;gap:6px;height:100%;background:#fff}
-.et{position:absolute;top:16px;font-weight:800;font-size:17px;letter-spacing:.12em;text-transform:uppercase;padding:6px 14px;border-radius:999px}
-.et--antes{left:16px;background:rgba(3,36,28,.85);color:#fff}.et--despues{right:16px;background:#fff;color:#03241c}
-.ia{position:absolute;left:14px;bottom:14px;background:rgba(3,36,28,.82);color:#fff;font-size:15px;font-weight:600;padding:5px 12px;border-radius:999px}
+.mosaico,.partida{display:grid;grid-template-columns:1fr 1fr;gap:4px;height:100%;background:#fffdf8}
+.mosaico{grid-template-rows:1fr 1fr}
+.et{position:absolute;top:14px;font-weight:700;font-size:14px;letter-spacing:.18em;text-transform:uppercase;padding:5px 11px;border-radius:2px}
+.et--antes{left:14px;background:rgba(24,36,31,.85);color:#fff}.et--despues{right:14px;background:#fffdf8;color:#18241f}
+.ia{position:absolute;left:12px;bottom:12px;background:rgba(24,36,31,.8);color:#fff;font-size:14px;font-weight:600;padding:4px 10px;border-radius:2px}
 </style></head><body>
 <div class="texto">
   <img class="logo" src="${datos('img/logo-cleangreen.svg', 'image/svg+xml')}" alt="">
+  <p class="etiqueta">${t.etiqueta}</p>
   <h1>${t.titulo}</h1>
-  <div class="pie"><span class="pildora">Presupuesto sin compromiso</span><span class="zona">Amposta · Alcanar · La Ràpita y alrededores</span></div>
+  <div class="filete"></div>
+  <div class="pie"><span class="boton">Presupuesto sin compromiso</span><span class="zona">Amposta · Alcanar · La Ràpita y alrededores</span></div>
 </div>
 <div class="visual">${t.visual}<span class="ia">Imagen ilustrativa generada con IA</span></div>
 </body></html>`;

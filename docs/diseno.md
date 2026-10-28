@@ -1,58 +1,73 @@
 # Diseño de la web
 
+## Dirección: «Cartografía del Montsià»
+
+Una web formal, con aspecto de documento bien compuesto y no de plantilla. Se ha huido de los recursos que delatan una web genérica: barras de color en el lateral de las tarjetas, iconos dentro de cuadrados de color, píldoras, destellos ✦ y una paleta distinta para cada sección.
+
+En su lugar:
+
+- **Una paleta corta** sacada del logo y del territorio.
+- **Filetes finos** de 1 px para separar, y un **filete doble** (fino arriba y grueso abajo) bajo cada cabecera, como el membrete de un documento.
+- **Numeración en serifa** (01-05, I-IV) para ordenar, en lugar de colores.
+- **Fotografías enmarcadas como láminas**: paspartú marfil, esquinas rectas y un marco de filete desplazado en la foto destacada.
+- **Curvas de nivel** muy tenues de fondo: el relieve del Montsià como textura.
+
 ## Referencias estudiadas
 
-| Web | Qué se ha tomado | Qué se ha evitado |
+| Referencia | Qué se ha tomado | Qué se ha evitado |
 |---|---|---|
+| Guía de estilo web de la Universidad de Córdoba (material del curso) | Paleta corta derivada del logo: tres colores base y el resto solo de apoyo. Iconos monocromos. Menús y secciones delimitados por filetes. Retícula común | Degradados y la cantidad de colores complementarios |
+| Guía d'estils web (material del curso) | *Design tokens* en CSS (`--verde`, `--ocre`, `--e-1`… `--e-8`, `--radio`) y jerarquía tokens → componentes → páginas | — |
 | [Aitor Soluciones](https://aitorsoluciones.com/) (competencia, Les Cases d'Alcanar) | Contacto por WhatsApp, proceso en pasos, zonas por pueblo, preguntas frecuentes | Paleta azul marino y naranja, titulares condensados, formulario largo |
-| [Native Edge Landscapes](https://nativeedgelandscapes.com/) | Titular con serifa, fila de garantías bajo el botón | Foto de fondo oscura a pantalla completa |
-| [Pearl Landscaping](https://www.pearllandscaping.com/) | Contraste entre secciones oscuras y claras | Carrusel de fotos |
 | [Davey](https://www.davey.com/) | Contenido de autoridad: guía con normativa y fuentes | Menús complejos |
 
 ## Tipografía formal
 
-- **Títulos: Playfair Display** (pesos 600 a 800). Es una serifa de alto contraste, clásica y seria, que da a la web un tono formal y de confianza. Los títulos van siempre en redonda (sin cursivas) y en un solo color: no hay palabras destacadas en otro color dentro de un título.
-- **Texto: Figtree** (pesos 300 a 900). Sans serif clara y muy legible en el móvil. El texto base mide 17 o 18 px, pensando en propietarios de cualquier edad.
+- **Títulos: Playfair Display** con peso 600. Es una serifa clásica que da un tono formal y de confianza. Los títulos van siempre en redonda (sin cursivas) y en un solo color.
+- **Texto: Figtree** (pesos 300 a 900). Sans serif clara y muy legible en el móvil. El texto base mide 17 o 18 px.
+- **Etiquetas de sección** en versalitas espaciadas y en ocre, sin icono.
+- **Números** (áreas, pasos, factores del precio, estaciones) en Playfair Display y en ocre.
 - Las dos fuentes están en la propia web (`src/publico/fonts/`), recortadas a los caracteres del castellano y el catalán, y se cargan con `font-display: swap`.
 
 ## Color
 
-Los colores salen del logo:
+Tres colores base y neutros de papel y piedra. Están definidos como *tokens* al principio de `estilos.css`.
 
-| Uso | Color |
-|---|---|
-| Texto principal (tinta) | `#03241c` |
-| Turquesa de la marca | `#00977a` (para texto, `#00735d`; sobre fondo oscuro, `#2fbf98`) |
-| Fondo crema / crema 2 / línea | `#fbf7ef` / `#f4ecdc` / `#e2d6bf` |
-| Texto secundario | `#4d5a52` |
-| Verde bosque (fondos oscuros) | `#0b2a20` |
-| Sol (detalles) | `#f0b448` |
-| WhatsApp | `#25d366`, **solo** en botones que abren WhatsApp |
-| Riesgo de incendio | `#b42318`, distinto del terracota de segundas residencias |
+| Token | Color | Uso |
+|---|---|---|
+| `--verde` | `#1f4a3d` | Verde Montsià: botones, enlaces activos, filete doble y municipios del mapa |
+| `--tinta` | `#18241f` | Texto principal y títulos |
+| `--ocre` | `#9a7b47` | Bronce de olivo y piedra seca: filetes de detalle y números |
+| `--ocre-texto` | `#765a2c` | Ocre para texto pequeño (contraste AA sobre marfil) |
+| `--papel` | `#f6f3ec` | Marfil: fondo general |
+| `--papel-2` | `#ede7db` | Piedra: fondo de secciones alternas |
+| `--blanco` | `#fffdf8` | Superficie de tarjetas y paspartú de las fotos |
+| `--linea` | `#d8cfbf` | Filete de 1 px |
+| `--suave` | `#4c5750` | Texto secundario |
+| `--bosque` | `#142b24` | Bandas oscuras y pie |
+| `--riesgo` | `#9e2f24` | Solo para el aviso de la época de peligro de incendio |
 
-### Sistema de color por áreas
+El verde de WhatsApp (`#25d366`) solo aparece en el glifo de WhatsApp de los botones, para reconocerlo. El botón en sí es verde Montsià, como el resto de botones principales.
 
-Cada área de servicio tiene su color, que se aplica con una clase (`.area-hogar`, `.area-jardin`…) a tarjetas, iconos, cabeceras de página, bloques, botones y submenú. La clase define tres variables: `--area` (color), `--area-osc` (para texto, contraste AA) y `--area-suave` (fondos).
+### Las cinco áreas se distinguen por su número
 
-| Área | `--area` | `--area-osc` | `--area-suave` |
-|---|---|---|---|
-| Limpieza de casas y pisos | `#2c6e8f` | `#1f5671` | `#e3eef4` |
-| Jardinería | `#3f7d4e` | `#2f6340` | `#e6f0e6` |
-| Desbroce y limpieza de parcelas | `#b07a2a` | `#8a5a14` | `#f5ead6` |
-| Segundas residencias | `#b85c38` | `#9a4527` | `#f7e4da` |
-| Mantenimiento periódico | `#00977a` | `#00735d` | `#d9f0e7` |
+Antes cada área tenía su color. Ahora comparten paleta y se distinguen por su **número**: 01 Limpieza de casas y pisos, 02 Jardinería, 03 Desbroce y limpieza de parcelas, 04 Segundas residencias y 05 Mantenimiento periódico. El número aparece en las tarjetas de la portada, en el índice de servicios, en el submenú y en las imágenes para compartir. Es más sobrio y no depende del color, así que también funciona para quien no distingue bien los colores.
 
 ## Principios de la Gestalt aplicados
 
 | Principio | Qué dice | Dónde se ve en la web |
 |---|---|---|
-| **Proximidad** | Lo que está cerca se percibe como un grupo | Una escala de espacios (`--e-1` a `--e-8`): dentro de un componente, como mucho 16 px; entre componentes, de 24 a 48 px; entre secciones, de 64 a 120 px. En cada tarjeta de servicio, el icono, el título y el texto van juntos, y la lista de lo que incluye queda separada por una línea fina. |
-| **Semejanza** | Lo que se parece se percibe como relacionado | El color de cada área se repite en su tarjeta, su icono, su cabecera de página, su botón y su entrada del submenú: el verde de jardinería en todo lo de jardinería. Lo que tiene la misma función tiene el mismo aspecto: todos los botones de WhatsApp son verdes (y solo ellos) y todos los «ver más» llevan flecha. |
-| **Región común** | Lo que comparte un fondo o un borde forma un grupo | Las tarjetas de área, los paneles laterales de las guías y la «hoja de encargo» del asistente de presupuesto encierran en un fondo blanco con borde lo que va junto. |
-| **Continuidad** | El ojo sigue líneas y alineaciones | Los cuatro pasos de «Cómo trabajamos» están unidos por una línea discontinua. Todo se alinea a la misma rejilla y al mismo borde izquierdo; con cuatro servicios, la rejilla pasa a dos columnas para que no quede una tarjeta suelta. |
-| **Cierre** | Completamos mentalmente las formas abiertas | El logo y los iconos se leen completos aunque tengan trazos abiertos. El comparador antes/después muestra media foto de cada momento y se completa al deslizar. |
-| **Figura-fondo** | Distinguimos lo que destaca de lo que está detrás | Bandas de verde bosque que separan bloques; fotos enmarcadas con borde blanco y sombra sobre una mancha del color del área; una sola llamada principal (verde WhatsApp) en cada pantalla. |
-| **Pregnancia y punto focal** | Preferimos las formas simples; un elemento domina | Formas simples (rectángulos redondeados, círculos, píldoras) y, en cada sección, un único elemento dominante: el título en Playfair Display. |
+| **Proximidad** | Lo que está cerca se percibe como un grupo | Una escala de espacios (`--e-1` a `--e-8`): dentro de un componente, como mucho 16 px; entre componentes, de 24 a 48 px; entre secciones, de 64 a 120 px. En cada tarjeta de servicio, el icono, el título y el texto van juntos, y la lista de lo que incluye queda separada por un filete. |
+| **Semejanza** | Lo que se parece se percibe como relacionado | Lo que tiene la misma función tiene el mismo aspecto: todos los botones principales son verde Montsià, todas las etiquetas de sección van en versalitas ocre y todos los números en serifa ocre. Las cinco áreas comparten forma y se reconocen por su número. |
+| **Región común** | Lo que comparte un fondo o un borde forma un grupo | Las tarjetas, los paneles laterales de las guías y la «hoja de encargo» del presupuesto encierran lo que va junto en una superficie marfil con un filete de 1 px. |
+| **Continuidad** | El ojo sigue líneas y alineaciones | Los cuatro pasos de «Cómo trabajamos» están unidos por un filete ocre. Todo se alinea a la misma rejilla y al mismo margen izquierdo; con cuatro servicios, la rejilla pasa a dos columnas para que no quede una tarjeta suelta. |
+| **Cierre** | Completamos mentalmente las formas abiertas | El comparador antes/después muestra media foto de cada momento y se completa al deslizar. El marco de filete desplazado detrás de la foto de segundas residencias se lee como un rectángulo completo aunque la foto lo tape. |
+| **Figura-fondo** | Distinguimos lo que destaca de lo que está detrás | Bandas verde bosque que separan bloques; fotos con paspartú que se despegan del papel; una sola llamada principal en cada pantalla. |
+| **Pregnancia y punto focal** | Preferimos las formas simples; un elemento domina | Formas rectas y simples (rectángulos de esquinas mínimas y filetes) y, en cada sección, un único elemento dominante: el título en Playfair Display. |
+
+## Iconos
+
+Dibujo de línea de 1,4 px sobre una rejilla de 24 px, en un solo color y **sin fondo**: nada de cuadrados de color detrás. Están todos en `src/publico/img/iconos.svg`. Para encargar un juego nuevo y más personal, hay un prompt preparado en [prompt-iconos.md](prompt-iconos.md).
 
 ## Imágenes
 
@@ -60,7 +75,7 @@ Las fotos son **imágenes ilustrativas generadas con IA** y lo dicen: cada una l
 
 ## Accesibilidad
 
-- Contraste AA en todos los textos (el texto de color usa siempre la variante `--area-osc`).
+- Contraste AA en todos los textos (el ocre de los textos pequeños es la variante oscura `--ocre-texto`).
 - `:focus-visible` claro en todo lo que se puede usar con el teclado; el comparador se mueve con las flechas.
 - Respeta `prefers-reduced-motion`: sin animaciones si la persona lo ha pedido.
 - Barra de contacto fija en el móvil, que se oculta al abrir el menú.
@@ -70,7 +85,8 @@ Las fotos son **imágenes ilustrativas generadas con IA** y lo dicen: cada una l
 
 ## En qué supera a la competencia
 
-- **Más servicios, mejor ordenados:** cinco áreas con su propia página, su color y sus preguntas frecuentes, más páginas por pueblo y guías.
+- **Aspecto formal y propio:** paleta del territorio, filetes y numeración en serifa, en lugar de los recursos de una plantilla genérica.
+- **Más servicios, mejor ordenados:** cinco áreas con su propia página y sus preguntas frecuentes, más páginas por pueblo y guías.
 - **Pedir presupuesto es más fácil:** se marcan unas opciones y sale el mensaje de WhatsApp escrito, sin formularios ni datos guardados en ningún servidor.
 - **Contenido útil:** la guía de normativa de incendios cita fuentes oficiales y responde a lo que se preguntan los propietarios.
 - **Honesta:** sin opiniones inventadas, sin precios inventados y con las imágenes de IA marcadas como tales.
