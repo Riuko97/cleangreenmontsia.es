@@ -15,14 +15,18 @@ export const negocio = {
   whatsapp: '34600123456',
   comarca: 'Montsià',
   zonasPrincipales: ['Amposta', 'Alcanar', 'Sant Carles de la Ràpita'],
-  // Dominio previsto. Mientras no esté comprado, la web se publica en GitHub Pages
-  // y el flujo de publicación sustituye esta URL por la de GitHub (SITIO_URL).
+  // Dominio previsto. Mientras no esté comprado, la web se publica con la URL de
+  // GitHub Pages (el flujo de publicación la pasa en SITIO_URL) o la de Vercel.
   dominio: 'https://cleangreenmontsia.es/',
 };
 
+// En Vercel, el dominio de producción del proyecto: el *.vercel.app y, cuando se
+// añada en Vercel, el dominio propio. Vercel lo da sin «https://».
+const enVercel = process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/`;
+
 export const sitio = {
   // URL absoluta para canonical, Open Graph, sitemap y datos estructurados.
-  url: process.env.SITIO_URL || negocio.dominio,
+  url: process.env.SITIO_URL || enVercel || negocio.dominio,
   // Prefijo de las rutas internas: «/» con dominio propio,
   // «/cleangreenmontsia.es/» si se publica en riuko97.github.io/cleangreenmontsia.es/.
   base: process.env.BASE_PATH || '/',
