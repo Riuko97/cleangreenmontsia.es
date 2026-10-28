@@ -1,26 +1,24 @@
-# Dominio: dónde comprar «cleangreenparcelas»
+# Dominio: cuál comprar y dónde
 
-Comprobado el 28 de octubre de 2026.
+Disponibilidad comprobada el 28 de octubre de 2026. El buscador del registrador te la confirmará en el momento de comprarlo.
 
-## ¿Está libre?
+## Qué dominio comprar
+
+**Recomendación: `cleangreenmontsia.es`.** El negocio ya no es solo de parcelas: también hace limpieza de casas y pisos, jardinería, segundas residencias y mantenimiento. Un dominio con la marca y la comarca sirve para todo eso, transmite que eres un negocio de aquí y es el que espera la web.
+
+- Si el presupuesto lo permite, compra también **`cleangreenparcelas.es`** y redirígelo a `cleangreenmontsia.es`. Así lo tienes protegido y aprovechas a quien lo escriba buscando el desbroce de parcelas.
+- El `.com` (`cleangreenmontsia.com`) es opcional; si lo compras, redirígelo también al `.es`.
+- Para un `.es` necesitas un **NIF o NIE**. Si eres persona física, el titular y el contacto administrativo deben ser la misma persona.
 
 | Dominio | Estado | Cómo se ha comprobado |
 |---|---|---|
-| cleangreenparcelas.es | Parece libre | No existe en el DNS. El .es no tiene consulta pública RDAP |
+| **cleangreenmontsia.es** | Parece libre | No existe en el DNS. El .es no tiene consulta pública RDAP |
+| cleangreenmontsia.com | **Libre** | RDAP oficial de Verisign: no registrado |
+| cleangreenparcelas.es | Parece libre | No existe en el DNS |
 | cleangreenparcelas.com | **Libre** | RDAP oficial de Verisign: no registrado |
 | cleangreenparcelas.net | **Libre** | RDAP oficial de Verisign: no registrado |
 | cleangreenparcelas.cat | **Libre** | RDAP oficial de puntCAT: no registrado |
 | cleangreenparcelas.eu | Parece libre | No existe en el DNS |
-| cleangreenmontsia.es | Parece libre | No existe en el DNS |
-| cleangreenmontsia.com | **Libre** | RDAP oficial de Verisign: no registrado |
-
-El buscador del registrador te confirmará la disponibilidad en el momento de comprarlo.
-
-## Qué dominio comprar
-
-**Recomendación: `cleangreenparcelas.es`.** Es el dominio que espera la web y el .es transmite que eres un negocio de aquí. Si el presupuesto lo permite, compra también el `.com` y redirígelo al `.es`, para que nadie lo registre por ti.
-
-Para un .es necesitas un **NIF o NIE**. Si eres persona física, el titular y el contacto administrativo deben ser la misma persona.
 
 ## Dónde comprarlo
 
@@ -37,10 +35,11 @@ Precios por año en euros. Ojo con las ofertas del primer año: lo que más cuen
 
 ## Conectar el dominio con GitHub Pages
 
-Datos de la [documentación de GitHub](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site):
+La web se publica con GitHub Actions, así que **no hace falta archivo `CNAME`** en el repositorio: el dominio se configura en GitHub. Datos de la [documentación de GitHub](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site):
 
-1. En GitHub, ve a **Settings → Pages → Custom domain**, escribe `cleangreenparcelas.es` y guarda. Hazlo **antes** de tocar el DNS. GitHub creará el archivo `CNAME` en el repositorio.
-2. En el panel DNS del registrador, crea estos registros:
+1. En GitHub, ve a **Settings → Pages → Custom domain**, escribe `cleangreenmontsia.es` y guarda. Hazlo **antes** de tocar el DNS.
+2. En **Settings → Secrets and variables → Actions → Variables**, crea la variable `DOMINIO` con el valor `cleangreenmontsia.es`. Así la web genera todas sus URL, el sitemap y los datos estructurados con el dominio.
+3. En el panel DNS del registrador, crea estos registros:
 
    | Tipo | Nombre | Valor |
    |---|---|---|
@@ -54,6 +53,7 @@ Datos de la [documentación de GitHub](https://docs.github.com/en/pages/configur
    | AAAA | @ | 2606:50c0:8003::153 |
    | CNAME | www | riuko97.github.io |
 
-3. Espera a que se propague, hasta 24 horas, y marca **Enforce HTTPS** en la misma pantalla de Pages.
-4. GitHub recomienda **verificar el dominio** en la configuración de tu cuenta para evitar que otro lo use.
-5. Da de alta la propiedad en Google Search Console y envía `https://cleangreenparcelas.es/sitemap.xml`, como hiciste en la tarea B07.
+4. Vuelve a publicar desde **Actions → Publicar la web → Run workflow**.
+5. Espera a que se propague, hasta 24 horas, y marca **Enforce HTTPS** en **Settings → Pages**.
+6. GitHub recomienda **verificar el dominio** en la configuración de tu cuenta para evitar que otro lo use.
+7. Da de alta la propiedad en Google Search Console y envía `https://cleangreenmontsia.es/sitemap.xml`.

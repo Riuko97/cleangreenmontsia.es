@@ -1,51 +1,58 @@
 # Imágenes de la web
 
-## Lo que ya está hecho
+## Lo que hay ahora
 
-Todas las imágenes actuales están dibujadas en vectorial (SVG). Se ven nítidas en cualquier pantalla y pesan muy poco.
+| Qué | Dónde | Formato |
+|---|---|---|
+| Logo | `img/logo-cleangreen.svg` (texto oscuro), `img/logo-cleangreen-blanco.svg` (fondos oscuros), `img/logo-cleangreen-completo*.svg` e `img/icono-cleangreen.svg` (solo el icono) | SVG |
+| Iconos de servicios | `img/iconos.svg` (un solo archivo con todos) | SVG |
+| Fotos de cada área | `img/fotos/<nombre>-<ancho>.avif` y `.webp` | AVIF y WebP, a 640, 960 y 1280 px |
+| Imágenes para compartir (Open Graph) | `img/og/inicio.jpg`, `hogar.jpg`, `jardin.jpg`, `parcela.jpg`, `residencia.jpg` y `mantenimiento.jpg` | JPG de 1200 × 630 |
+| Favicon e iconos de la app | `favicon.ico`, `img/apple-touch-icon.png`, `img/icono-*.png` | ICO y PNG |
 
-- **Logo:** `img/logo-cleangreen.svg` (texto oscuro), `img/logo-cleangreen-blanco.svg` (para fondos oscuros), `img/logo-cleangreen-completo.svg` (con «Desbroce y limpieza de parcelas») e `img/icono-cleangreen.svg` (solo el icono). Es una versión vectorial del logo de CleanGreen, con la misma casa, hoja y destello.
-- **Ilustración del antes y el después:** `img/ilustraciones/parcela-despues.svg` y `parcela-antes.svg`, con la Serra del Montsià al fondo.
-- **Iconos de servicios:** `img/iconos.svg`.
-- **Imagen para compartir en redes y WhatsApp:** `img/og-cleangreen.jpg` (1200 × 630).
-- **Favicon e iconos de la app:** `favicon.ico`, `img/apple-touch-icon.png` e `img/icono-*.png`.
+Todas las rutas son dentro de `src/publico/`.
 
-## Fotos del equipo: mejor reales
+### Las fotos
 
-No conviene poner en la web personas generadas con IA presentadas como tu equipo. El cliente cree que verá a esas personas en su parcela. Además, el reglamento europeo de IA obliga a avisar cuando una imagen realista está generada o manipulada con IA.
+| Nombre | Qué muestra | Dónde sale |
+|---|---|---|
+| `hogar` | Entrada de una casa mediterránea recién fregada | Limpieza de casas y pisos |
+| `jardin` | Jardín con camino de grava, seto, romero, lavanda y olivo | Jardinería |
+| `parcela-antes` y `parcela-despues` | La misma parcela, con hierba alta y desbrozada | Comparador de la portada y de parcelas, tarjeta de parcelas y página 404 |
+| `residencia` | Casa blanca al anochecer con las persianas cerradas | Segundas residencias |
+| `mantenimiento` | Manos con guantes revisando el riego por goteo | Mantenimiento periódico |
 
-Lo que mejor funciona y más confianza da:
+**Son imágenes ilustrativas generadas con IA.** Por eso:
 
-- Una foto real tuya o del equipo trabajando, aunque sea con el móvil. Que se vea la ropa de trabajo y la maquinaria.
-- Fotos reales de antes y después de cada trabajo, hechas desde el mismo sitio y con el mismo encuadre.
+- cada foto lleva encima la nota «Imagen ilustrativa generada con IA», y el pie del comparador también lo dice;
+- su texto alternativo empieza por «Imagen ilustrativa generada con IA»;
+- el aviso legal explica que no muestran trabajos reales ni a personas del equipo.
 
-## Cuando tengas fotos reales de antes y después
+Esto lo pide la transparencia del reglamento europeo de IA para imágenes realistas, y evita que un cliente piense que son trabajos tuyos.
 
-El comparador de la portada funciona igual con fotos:
+**No se han usado las fotos de personas** con el polo de CleanGreen (limpiando, rastrillando, desbrozando o cargando el remolque). Al ser realistas y llevar tu marca, un cliente podría creer que esa persona es de tu equipo y que es quien irá a su casa.
 
-1. Haz las dos fotos desde el mismo punto, en horizontal y con proporción 4:3.
-2. Guárdalas como `img/fotos/antes-1.jpg` y `img/fotos/despues-1.jpg`, a unos 1280 × 960 px y por debajo de 250 KB cada una.
-3. En `index.html`, dentro de `<div class="comparador" data-comparador>`, cambia el `src` de las dos imágenes:
-   - la primera, la de clase normal, por la foto de **después**;
-   - la segunda, `class="comparador__antes"`, por la foto de **antes**.
-4. Cambia el texto `alt` para describir el trabajo real, por ejemplo: «Parcela en Alcanar antes y después del desbroce».
-5. Cambia el pie «Ilustración: arrastra para ver el antes y el después» por «Trabajo real en Alcanar: arrastra para comparar».
+## Cuando tengas fotos reales
 
-## Si quieres imágenes de ChatGPT
+Las fotos reales tuyas o de tu equipo trabajando son lo que más confianza da, aunque sean del móvil. Para cambiarlas:
 
-Úsalas solo como **imágenes ilustrativas**, nunca como «nuestro trabajo» ni como «nuestro equipo». Pon en el `alt` y en el pie de foto «Imagen ilustrativa».
+1. Haz las fotos en **horizontal**. Si no son 4:3, el script las recorta por el centro.
+2. Para el antes y el después, haz las dos fotos **desde el mismo sitio y con el mismo encuadre**.
+3. Ponlas en una carpeta con estos nombres: `hogar.jpg`, `jardin.jpg`, `parcela-antes.jpg`, `parcela-despues.jpg`, `residencia.jpg` y `mantenimiento.jpg`.
+4. Genera las versiones para la web (sin datos de ubicación ni del móvil):
+   ```bash
+   python3 herramientas/optimizar-fotos.py CARPETA
+   ```
+5. Cambia los textos en el código:
+   - el `fotoAlt` de cada área en `src/modelo/servicios.js`, describiendo el trabajo real (por ejemplo: «Parcela en Alcanar antes y después del desbroce»);
+   - el `alt` y el pie del comparador en `src/vistas/componentes.js` (función `comparador`), por ejemplo «Trabajo real en Alcanar. Desliza para comparar.»;
+   - quita la nota de IA: en `src/vistas/componentes.js`, haz que `notaIa` devuelva una cadena vacía;
+   - en `src/modelo/legal.js`, borra la frase sobre las imágenes generadas con IA.
+6. Vuelve a generar las imágenes para compartir:
+   ```bash
+   npm install --no-save playwright && npx playwright install chromium
+   node herramientas/imagenes-og.mjs
+   ```
+7. Comprueba con `npm run dev` que todo se ve bien y sube los cambios.
 
-Indicaciones para pedírselas a ChatGPT:
-
-**Escena de desbroce (para una futura sección de servicios)**
-> Fotografía realista, horizontal 4:3. Un operario de espaldas desbrozando hierba alta y seca con una desbrozadora de hilo en una parcela del sur de Cataluña, con olivos y algarrobos y la Serra del Montsià al fondo. Lleva casco con pantalla, protectores auditivos, guantes y pantalón de protección. Luz de primera hora de la mañana, colores naturales. No se le ve la cara. Sin texto, sin logotipos, sin marcas.
-
-**Parcela limpia**
-> Fotografía realista, horizontal 4:3. Parcela recién desbrozada y limpia en el Montsià (Tarragona), con una casa de campo blanca de tejado de teja, un algarrobo grande y un muro de piedra seca. Suelo segado de forma uniforme, sin restos. Cielo despejado, luz cálida de tarde. Sin personas, sin texto.
-
-**Retirada de restos**
-> Fotografía realista, horizontal 4:3. Remolque cargado con ramas y restos de poda junto a una parcela rural mediterránea, con la parcela ya limpia detrás. Sin personas reconocibles, sin matrículas legibles, sin texto ni logotipos.
-
-Al descargar cada imagen:
-- conviértela a JPG o WebP de menos de 250 KB, a unos 1280 px de ancho;
-- guárdala en `img/fotos/` con un nombre descriptivo, por ejemplo `desbroce-ilustrativa.jpg`.
+Si solo cambias algunas fotos y otras siguen siendo de IA, deja la nota en las de IA: la función `imagen` y la nota están separadas, así que puedes quitar `${notaIa()}` solo donde ya haya una foto real.

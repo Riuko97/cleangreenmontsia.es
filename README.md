@@ -1,57 +1,107 @@
-# CleanGreen · Desbroce y limpieza de parcelas en el Montsià
+# CleanGreen · Limpieza, jardinería y mantenimiento en el Montsià
 
-Web estática de **CleanGreen (Clean & Green Servicios)** para el servicio de desbroce y limpieza de parcelas en Amposta, Alcanar, Sant Carles de la Ràpita y alrededores.
+Web de **CleanGreen (Clean & Green Servicios)**: limpieza de casas y pisos, jardinería, desbroce y limpieza de parcelas, cuidado de segundas residencias y mantenimiento periódico en Amposta, Alcanar (Les Cases d'Alcanar y Alcanar Platja), Sant Carles de la Ràpita y alrededores.
 
-Es HTML, CSS y JavaScript sin frameworks ni dependencias. No usa cookies ni analítica, y las tipografías están alojadas en la propia web.
+Es una web estática que se genera con Node.js siguiendo el patrón **modelo-vista-controlador (MVC)**. No tiene dependencias de ejecución, no usa cookies ni analítica, y no carga nada de otros servidores: tipografías, fotos e iconos están en la propia web.
 
-## Ver la web en local
+## Ver la web en tu ordenador
+
+Solo hace falta [Node.js](https://nodejs.org/) 20 o posterior. **No hay que ejecutar `npm install`.**
 
 ```bash
-python3 -m http.server 5173
+npm run dev
 ```
 
-Después abre <http://localhost:5173/>. En Codespaces, ábrela desde la pestaña **Puertos**.
+Abre <http://localhost:5173/>. Mientras está en marcha, la web se reconstruye sola cada vez que cambias algo en `src/`.
 
-## Páginas
-
-| Archivo | Contenido |
+| Comando | Qué hace |
 |---|---|
-| `index.html` | Portada: comparador antes/después, servicios, asistente de presupuesto por WhatsApp, temporada de incendios, cómo trabajamos, mapa de zonas, limpieza de casas y preguntas frecuentes |
-| `servicios.html` | Los diez servicios en detalle y qué influye en el precio |
-| `normativa-limpieza-parcelas.html` | Guía de normativa: época de peligro, quemas, urbanizaciones (Llei 5/2003), con fuentes oficiales |
-| `limpieza-parcelas-amposta.html`, `-alcanar.html`, `-la-rapita.html` | Páginas por pueblo para el posicionamiento local |
-| `contacto.html` | Asistente de presupuesto y consejos para mandar fotos |
-| `aviso-legal.html`, `privacidad.html`, `cookies.html` | Textos legales (con datos pendientes, ver abajo) |
-| `404.html` | Página de error de GitHub Pages |
+| `npm run build` | Genera la web en `dist/` |
+| `npm run check` | Auditoría SEO de `dist/`: títulos, descripciones, canonical, un solo h1, alt de las imágenes, Open Graph, datos estructurados, enlaces rotos, sitemap y páginas huérfanas |
+| `npm run dev` | Construye y abre el servidor local, que vigila los cambios |
+| `npm start` | Solo el servidor local (sirve lo que haya en `dist/`) |
 
-Otros archivos: `css/estilos.css` (todo el diseño), `js/principal.js` (menú, comparador y asistente), `img/` (logos, iconos e ilustraciones en SVG), `fonts/` (Fraunces y Figtree, licencia OFL), `sitemap.xml`, `robots.txt` y `site.webmanifest`.
+## Cómo está organizado (MVC)
 
-## Pendiente antes de publicar
+```
+src/
+├── modelo/          MODELO: los datos, sin nada de HTML
+│   ├── negocio.js     nombre, teléfono, WhatsApp, dominio (la única fuente de verdad)
+│   ├── servicios.js   las cinco áreas: servicios, fotos, preguntas, frecuencias y calendario
+│   ├── zonas.js       Amposta, Alcanar, La Ràpita y los pueblos de alrededor
+│   ├── guias.js       las dos guías, con sus fuentes oficiales
+│   ├── preguntas.js   preguntas frecuentes generales
+│   ├── legal.js       aviso legal, privacidad y cookies
+│   └── mapa.json      geometría del Montsià (OpenStreetMap)
+├── vistas/          VISTAS: reciben datos y devuelven HTML; no deciden nada
+│   ├── plantilla.js   <head>, cabecera con menú, pie y barra de contacto del móvil
+│   ├── componentes.js botones, fotos, tarjetas, comparador, asistente, mapa…
+│   └── paginas/       portada, servicios y cada área, zonas, guías, contacto, legales y 404
+├── controlador/     CONTROLADOR: decide qué página se genera con qué datos
+│   ├── rutas.js       tabla de rutas: modelo → vista, metadatos y datos estructurados
+│   ├── seo.js         schema.org, sitemap, robots.txt, llms.txt, manifiesto y CSP
+│   ├── construir.js   genera dist/ con URL limpias y huellas de caché
+│   ├── comprobar.js   auditoría SEO (npm run check)
+│   └── servidor.js    servidor local que se comporta como GitHub Pages
+└── publico/         archivos que se copian tal cual
+    ├── css/estilos.css  todo el diseño
+    ├── js/              JavaScript del navegador (módulos ES)
+    │   ├── app.js         arranca los módulos
+    │   ├── modulos/       menú, cabecera, comparador, aparición suave y año
+    │   └── presupuesto/   el asistente de presupuesto, también en MVC:
+    │                      modelo.js (datos y mensaje), vista.js (formulario)
+    │                      y controlador.js (los conecta y abre WhatsApp)
+    ├── fonts/           Playfair Display y Figtree (licencia OFL)
+    └── img/             logo, iconos, fotos/ y og/ (imágenes para compartir)
+herramientas/        scripts para regenerar las fotos y las imágenes para compartir
+docs/                diseño, SEO, dominio e imágenes
+```
 
-1. **Confirmar el teléfono.** La web usa el **681 87 51 73**, que estaba en la web anterior antes de cambiarlo por uno ficticio. Si no es el número del negocio, cámbialo en todos los archivos con:
-   ```bash
-   sed -i 's/681875173/NUEVONUMERO/g; s/681 87 51 73/NUE VO NU MERO/g' *.html
-   ```
-2. **Rellenar los datos legales.** En `aviso-legal.html` y `privacidad.html` hay huecos marcados en amarillo: nombre o razón social, NIF, dirección y correo. La ley (LSSI-CE) obliga a publicarlos.
-3. **Comprar el dominio.** Mira `docs/dominio.md`. La web está preparada para `https://cleangreenparcelas.es/`. Si compras otro, cambia las URL absolutas con:
-   ```bash
-   sed -i 's#https://cleangreenparcelas.es/#https://TUDOMINIO/#g' *.html sitemap.xml robots.txt
-   ```
-4. **Revisar los textos.** No se ha inventado ningún dato: ni opiniones, ni años de experiencia, ni fotos de trabajos. Aun así, repasa que estas frases encajan con cómo trabajas:
-   - "Con las fotos nos hacemos una idea. Si hace falta, quedamos para verla en persona."
-   - "Podemos llevarnos los restos y residuos de la parcela."
-   - "Acordamos un calendario de visitas" (mantenimiento todo el año).
-5. **Añadir fotos reales cuando las tengas.** Mira `docs/imagenes.md`.
+Ejemplo: para cambiar el teléfono, se cambia en `src/modelo/negocio.js` y aparece bien en todas las páginas, en los enlaces de WhatsApp y en los datos estructurados.
 
 ## Publicar en GitHub Pages
 
-1. Sube los cambios a la rama `main`.
-2. En GitHub, ve a **Settings → Pages**. En **Build and deployment**, elige *Deploy from a branch*, la rama `main` y la carpeta `/ (root)`.
-3. La web quedará en `https://riuko97.github.io/cleangreenmontsia.es/` hasta que conectes el dominio. Con el dominio propio funcionan también el `robots.txt` y la página 404.
+La web se publica sola con GitHub Actions (`.github/workflows/publicar.yml`) cada vez que se sube algo a la rama `main`.
+
+1. Une esta rama a `main` (por ejemplo, con una pull request).
+2. Solo la primera vez: en GitHub, **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. Mira el progreso en la pestaña **Actions**. Si `npm run check` encuentra un error, no se publica.
+4. Mientras no haya dominio propio, la web queda en `https://riuko97.github.io/cleangreenmontsia.es/`.
+
+### Cuando compres el dominio
+
+1. **Settings → Secrets and variables → Actions → Variables → New repository variable**: nombre `DOMINIO`, valor `cleangreenmontsia.es` (sin `https://` ni barra final).
+2. **Settings → Pages → Custom domain**: escribe el mismo dominio y configura el DNS como explica [docs/dominio.md](docs/dominio.md).
+3. Vuelve a ejecutar el flujo desde **Actions → Publicar la web → Run workflow**. Todas las URL, el sitemap y los datos estructurados pasarán a usar el dominio.
+
+## Pendiente por tu parte
+
+1. **Confirmar el teléfono.** La web usa el **681 87 51 73** para llamadas y WhatsApp. Si no es el del negocio, cámbialo en `src/modelo/negocio.js` (`telefono`, `telefonoVisible` y `whatsapp`).
+2. **Rellenar los datos legales.** En el aviso legal y en la política de privacidad hay huecos marcados en amarillo: nombre y apellidos o razón social, NIF, dirección completa y correo de contacto. La ley (LSSI-CE) obliga a publicarlos. Están en `src/modelo/legal.js`.
+3. **Comprar el dominio** `cleangreenmontsia.es`. Mira [docs/dominio.md](docs/dominio.md).
+4. **Revisar los textos.** No se ha inventado ningún dato del negocio: ni opiniones, ni años de experiencia, ni precios, ni plazos. Aun así, comprueba que los servicios y las frases describen cómo trabajas de verdad.
+5. **Fotos reales.** Las fotos actuales son imágenes ilustrativas generadas con IA y llevan un aviso que lo dice. Cuando tengas fotos tuyas, cámbialas siguiendo [docs/imagenes.md](docs/imagenes.md).
+
+## Regenerar fotos e imágenes para compartir
+
+- **Fotos** (`src/publico/img/fotos/`): `python3 herramientas/optimizar-fotos.py CARPETA` (necesita Pillow: `pip install pillow`). Crea las versiones AVIF y WebP a 640, 960 y 1280 px.
+- **Imágenes para compartir** (`src/publico/img/og/`, 1200 × 630): necesitan Playwright solo para esto.
+  ```bash
+  npm install --no-save playwright && npx playwright install chromium
+  node herramientas/imagenes-og.mjs
+  ```
+
+## Documentación
+
+- [docs/diseno.md](docs/diseno.md): tipografía, color por áreas y principios de la Gestalt aplicados.
+- [docs/seo.md](docs/seo.md): todo el SEO técnico implementado.
+- [docs/dominio.md](docs/dominio.md): qué dominio comprar, dónde y cómo conectarlo.
+- [docs/imagenes.md](docs/imagenes.md): fotos, imágenes para compartir y cómo cambiarlas.
 
 ## Créditos
 
-- Tipografías: [Fraunces](https://github.com/undercasetype/Fraunces) y [Figtree](https://github.com/erikdkennedy/figtree), licencia SIL Open Font License. Están recortadas a los caracteres del castellano y el catalán.
+- Tipografías: [Playfair Display](https://github.com/clauseggers/Playfair) y [Figtree](https://github.com/erikdkennedy/figtree), licencia SIL Open Font License. Recortadas a los caracteres del castellano y el catalán.
 - Mapa: datos de © colaboradores de [OpenStreetMap](https://www.openstreetmap.org/copyright), licencia ODbL.
 - Icono de WhatsApp: [Simple Icons](https://simpleicons.org/), CC0.
-- Logo, ilustraciones e iconos de servicios: dibujados para esta web en SVG a partir del logo de CleanGreen.
+- Logo e iconos: dibujados en SVG para esta web a partir del logo de CleanGreen.
+- Fotos: imágenes ilustrativas generadas con IA, aportadas por el propietario.
