@@ -4,8 +4,8 @@
 
    DIRECCIÓN DE DISEÑO: «Cartografía del Montsià». Un estilo formal, de
    documento bien compuesto: paleta corta sacada del logo y del territorio,
-   filetes finos en lugar de bloques de color, numeración en serifa para
-   ordenar y fotografía enmarcada como una lámina.
+   filetes finos en lugar de bloques de color y fotografía enmarcada como
+   una lámina.
 
    Tipografías alojadas en la propia web (no se envía la IP del visitante a
    terceros), ambas con licencia OFL:
@@ -22,8 +22,8 @@
      dentro de un componente se separa poco (≤ 16 px); los componentes entre
      sí, más (24-48 px); las secciones, mucho más (64-120 px).
    · Semejanza: lo que tiene la misma función tiene el mismo aspecto. Las
-     cinco áreas se distinguen por su número (01-05) en serifa ocre, no por
-     colores distintos; todos los botones principales son verde Montsià.
+     cinco áreas comparten forma y paleta, y se reconocen por su foto y su
+     nombre; todos los botones principales son verde Montsià.
    · Región común: tarjetas y paneles con un filete de 1 px y fondo marfil;
      la «hoja de encargo» agrupa todas las preguntas del presupuesto.
    · Continuidad: los pasos del proceso están unidos por un filete; todo se
@@ -47,7 +47,7 @@
   --verde:#1f4a3d;          /* verde Montsià: botones, bandas, marca */
   --verde-2:#2b5c4c;        /* verde para estados (hover) */
   --tinta:#18241f;          /* texto principal */
-  --ocre:#9a7b47;           /* bronce de olivo y piedra seca: filetes y números */
+  --ocre:#9a7b47;           /* bronce de olivo y piedra seca: filetes y detalles */
   --ocre-texto:#765a2c;     /* ocre para texto pequeño (AA sobre marfil) */
   --ocre-claro:#cdb07a;     /* ocre sobre fondos oscuros */
 
@@ -74,7 +74,7 @@
   --riesgo-claro:#b5463a;
   --riesgo-suave:#f6e9e4;
 
-  /* Las áreas comparten paleta: se distinguen por su número */
+  /* Las cinco áreas comparten paleta */
   --area:var(--verde);
   --area-osc:var(--verde);
   --area-suave:var(--papel-2);
@@ -114,6 +114,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth;
 body{
   margin:0;background:var(--papel);color:var(--tinta);
   font-family:var(--f-texto);font-size:clamp(1.0625rem,1rem + .2vw,1.125rem);line-height:1.65;
+  font-variant-numeric:lining-nums; /* cifras alineadas: Playfair las trae elzevirianas */
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
   overflow-x:hidden;
 }
@@ -252,14 +253,13 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
 .nav__desplegar svg{width:15px;height:15px;transition:transform .2s}
 .nav__grupo.abierto .nav__desplegar svg{transform:rotate(180deg)}
 
-/* Submenú de servicios: lista numerada con filetes, sin iconos */
+/* Submenú de servicios: lista con filetes, sin iconos */
 .submenu li + li{border-top:1px solid var(--linea-2)}
 .submenu li a{
   display:flex;align-items:baseline;gap:var(--e-3);padding:12px 14px;
   color:var(--tinta);text-decoration:none;line-height:1.3;transition:background-color .12s;
 }
 .submenu li a:hover,.submenu li a[aria-current="page"]{background:var(--papel)}
-.submenu__num{flex:none;font-family:var(--f-titulo);font-size:1rem;font-weight:600;color:var(--ocre-texto);min-width:1.6em}
 .submenu .icono{display:none}
 .submenu strong{display:block;font-weight:650;font-size:.97rem}
 .submenu small{display:block;color:var(--suave);font-size:.84rem;margin-top:2px}
@@ -382,8 +382,8 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
 .valores span{font-size:.95rem;color:#b3c3ba;line-height:1.5}
 
 /* --------------------------------------------------- Tarjetas de área */
-/* Región común + semejanza: la misma forma para las cinco áreas; las
-   distingue su número. El enlace del título cubre toda la tarjeta. */
+/* Región común + semejanza: la misma forma para las cinco áreas. El
+   enlace del título cubre toda la tarjeta. */
 .areas{display:grid;gap:var(--e-5)}
 @media (min-width:640px){.areas{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (min-width:640px) and (max-width:999px){.areas > :last-child:nth-child(odd){grid-column:1/-1}}
@@ -404,7 +404,6 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
 .tarjeta-area__imagen img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .tarjeta-area:hover .tarjeta-area__imagen img{transform:scale(1.025)}
 .tarjeta-area__cuerpo{position:relative;display:flex;flex-direction:column;flex:1;padding:var(--e-5) var(--e-5) var(--e-5)}
-.tarjeta-area__num{display:block;margin-bottom:var(--e-2);font-family:var(--f-titulo);font-size:1.05rem;font-weight:600;color:var(--ocre-texto);letter-spacing:.04em}
 .tarjeta-area__icono{display:none}
 .tarjeta-area h2,.tarjeta-area h3{font-size:clamp(1.3rem,1.15rem + .5vw,1.5rem);margin:0 0 var(--e-2)}
 .tarjeta-area h2 a,.tarjeta-area h3 a{color:var(--tinta);text-decoration:none}
@@ -534,11 +533,10 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
 @media (min-width:1000px){.ano{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}.ano__texto{position:sticky;top:calc(var(--alto-cabecera) + 24px)}}
 .ano__ilustracion{position:relative;max-width:520px;margin:var(--e-5) 0}
 .ano__ilustracion img{width:100%}
-/* Cuatro estaciones numeradas en romanos, con filetes */
-.estaciones{display:grid;gap:var(--e-4);list-style:none;margin:0;padding:0;counter-reset:estacion}
+/* Cuatro estaciones con filetes */
+.estaciones{display:grid;gap:var(--e-4);list-style:none;margin:0;padding:0}
 @media (min-width:640px){.estaciones{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.estacion{counter-increment:estacion;position:relative;background:var(--blanco);border:1px solid var(--linea);border-radius:var(--radio);padding:var(--e-5)}
-.estacion::before{content:counter(estacion,upper-roman);position:absolute;top:var(--e-5);right:var(--e-5);font-family:var(--f-titulo);font-size:1.1rem;font-weight:600;color:var(--ocre)}
+.estacion{position:relative;background:var(--blanco);border:1px solid var(--linea);border-radius:var(--radio);padding:var(--e-5)}
 .estacion h3{margin:0;font-size:1.32rem}
 .estacion__meses{margin:2px 0 var(--e-4);padding-bottom:var(--e-3);border-bottom:1px solid var(--linea-2);font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ocre-texto)}
 .estacion ul{list-style:none;margin:0;padding:0;display:grid;gap:var(--e-2)}
@@ -776,16 +774,32 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
 @media (min-width:1000px){.relacionadas{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .relacionadas .tarjeta-guia{height:100%}
 
-/* Índice de servicios: una fila de enlaces numerados entre filetes */
-.indice ul{display:flex;flex-wrap:wrap;gap:0;list-style:none;padding:0;margin:0 0 clamp(32px,5vw,48px);border-block:1px solid var(--linea)}
-.indice li{display:flex}
-.indice a{
-  display:inline-flex;align-items:center;gap:var(--e-2);min-height:48px;padding:12px 16px;
-  font-weight:600;font-size:.94rem;text-decoration:none;color:var(--tinta);
+/* Índice de servicios: cinco accesos iguales en un panel. Los filetes entre
+   botones salen del hueco de 1 px de la rejilla, así cuadran con cualquier
+   número de columnas (una en el móvil, dos en la tableta, cinco en el escritorio). */
+.indice ul{
+  display:grid;gap:1px;list-style:none;margin:0 0 clamp(32px,5vw,48px);padding:0;
+  background:var(--linea);border:1px solid var(--linea);border-radius:var(--radio);overflow:hidden;
 }
-.indice a span{font-family:var(--f-titulo);color:var(--ocre-texto);font-weight:600}
-.indice a:hover{color:var(--verde);background:var(--blanco)}
-.indice svg{display:none}
+.indice li{display:flex;background:var(--blanco)}
+.indice a{
+  flex:1;display:flex;align-items:center;justify-content:space-between;gap:var(--e-3);min-height:56px;padding:12px 18px;
+  font-weight:650;font-size:.95rem;line-height:1.3;text-decoration:none;color:var(--tinta);
+  transition:background-color .15s,color .15s;
+}
+.indice a svg{width:16px;height:16px;flex:none;color:var(--ocre);transition:transform .15s,color .15s}
+.indice a:hover{background:var(--papel);color:var(--verde)}
+.indice a:hover svg{color:var(--verde);transform:translateY(2px)}
+.indice a:focus-visible{outline-offset:-3px}
+@media (min-width:640px){
+  .indice ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .indice li:last-child:nth-child(odd){grid-column:1/-1}
+}
+@media (min-width:1000px){
+  .indice ul{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .indice li:last-child:nth-child(odd){grid-column:auto}
+  .indice a{min-height:76px;padding:14px 18px}
+}
 .bloque-area{
   scroll-margin-top:calc(var(--alto-cabecera) + 16px);
   background:var(--blanco);border:1px solid var(--linea);border-radius:var(--radio);padding:clamp(16px,3vw,32px);
@@ -795,9 +809,8 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
 @media (min-width:760px){.bloque-area__cabecera{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}}
 .bloque-area__foto{position:relative}
 .bloque-area__cabecera img{width:100%;border-radius:var(--radio-s);background:var(--papel-2)}
-.bloque-area__num{display:block;font-family:var(--f-titulo);font-size:clamp(1.8rem,1.5rem + 1vw,2.4rem);font-weight:600;line-height:1;color:var(--ocre)}
 .bloque-area__icono{display:none}
-.bloque-area__cabecera h2{font-size:clamp(1.6rem,1.25rem + 1.3vw,2.15rem);margin:var(--e-3) 0 var(--e-2)}
+.bloque-area__cabecera h2{font-size:clamp(1.6rem,1.25rem + 1.3vw,2.15rem);margin:0 0 var(--e-2)}
 .bloque-area__cabecera p{color:var(--suave)}
 .bloque-area__servicios{display:grid;gap:0 var(--e-5);list-style:none;margin:var(--e-5) 0 0;padding:var(--e-3) 0 0;border-top:1px solid var(--linea)}
 @media (min-width:640px){.bloque-area__servicios{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -808,12 +821,11 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:700;letter-spacing:0}
 .bloque-area__servicios svg{width:20px;height:20px;flex:none;color:var(--ocre);margin-top:2px}
 .bloque-area__servicios strong{display:block;color:var(--tinta);font-size:1rem;font-weight:650;margin-bottom:2px}
 
-/* Factores del precio: numerados en serifa, con filete superior */
-.factores{display:grid;gap:var(--e-5) var(--e-6);list-style:none;padding:0;margin:0;counter-reset:factor}
+/* Factores del precio: con filete superior ocre */
+.factores{display:grid;gap:var(--e-5) var(--e-6);list-style:none;padding:0;margin:0}
 @media (min-width:640px){.factores{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (min-width:1000px){.factores{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.factores li{counter-increment:factor;padding-top:var(--e-4);border-top:1px solid var(--ocre)}
-.factores li::before{content:counter(factor,decimal-leading-zero);display:block;font-family:var(--f-titulo);font-weight:600;color:var(--ocre);margin-bottom:var(--e-2)}
+.factores li{padding-top:var(--e-4);border-top:1px solid var(--ocre)}
 .factores strong{display:flex;align-items:center;gap:var(--e-2);font-family:var(--f-titulo);font-size:1.22rem;font-weight:600;margin-bottom:var(--e-2)}
 .factores strong svg{width:22px;height:22px;color:var(--ocre)}
 .factores span{color:var(--suave);font-size:.95rem;line-height:1.5}

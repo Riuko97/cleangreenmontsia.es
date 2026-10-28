@@ -2,7 +2,6 @@
 import fs from 'node:fs';
 import { negocio } from '../modelo/negocio.js';
 import { PUEBLOS_FORMULARIO } from '../modelo/zonas.js';
-import { AREAS } from '../modelo/servicios.js';
 import { url, wa, tel, sinCortes, ic, RUTAS, enlazar, esc } from './utilidades.js';
 
 // ---------------------------------------------------------------- Botones
@@ -13,9 +12,6 @@ export const botonTel = (texto = negocio.telefonoVisible, clase = 'boton--borde'
 
 // Etiqueta de sección en versalitas, sin icono (estilo formal).
 export const etiqueta = texto => `<p class="etiqueta">${texto}</p>`;
-
-// Número de cada área (01-05): las distingue la tipografía, no un color.
-export const numeroArea = area => String(AREAS.findIndex(a => a.id === area.id) + 1).padStart(2, '0');
 
 // ------------------------------------------------------------------ Migas
 export const migas = items => `<nav class="migas" aria-label="Estás aquí"><ol>${items.map(([t, h], i) =>
@@ -84,7 +80,6 @@ export const comparador = ({ prioridad = true } = {}) => `<div class="comparador
 export const tarjetaArea = (area, { titulo = 'h3', destacada = false } = {}) => `<article class="tarjeta-area area-${area.clave}${destacada ? ' tarjeta-area--destacada' : ''}" data-revelar>
         <div class="tarjeta-area__imagen">${imagen(area.foto, { tamanos: '(min-width: 1000px) 400px, (min-width: 640px) 50vw, 100vw' })}${notaIa()}</div>
         <div class="tarjeta-area__cuerpo">
-          <span class="tarjeta-area__num" aria-hidden="true">${numeroArea(area)}</span>
           <${titulo}><a href="${url(RUTAS.area(area.id))}">${area.nombre}</a></${titulo}>
           <p>${area.resumen}</p>
           <ul class="tarjeta-area__lista">

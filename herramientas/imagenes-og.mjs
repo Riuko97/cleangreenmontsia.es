@@ -19,12 +19,12 @@ const DESTINO = path.join(PUBLICO, 'img/og');
 const datos = (archivo, tipo) => `data:${tipo};base64,${fs.readFileSync(path.join(PUBLICO, archivo)).toString('base64')}`;
 const foto = nombre => datos(`img/fotos/${nombre}-960.webp`, 'image/webp');
 
-// Etiqueta superior: el número del área (01-05) y su nombre, como en la web.
+// Etiqueta superior: el nombre corto del área.
 const tarjetas = [
   { archivo: 'inicio', etiqueta: 'Montsià · Terres de l’Ebre', titulo: 'Limpieza, jardinería y mantenimiento en el Montsià',
     visual: `<div class="mosaico">${['hogar', 'jardin', 'parcela-despues', 'residencia'].map(f => `<img src="${foto(f)}" alt="">`).join('')}</div>` },
-  ...AREAS.map((a, i) => ({
-    archivo: a.clave, etiqueta: `0${i + 1} · ${a.corto}`, titulo: a.titulo,
+  ...AREAS.map(a => ({
+    archivo: a.clave, etiqueta: a.corto, titulo: a.titulo,
     visual: a.clave === 'parcela'
       ? `<div class="partida"><img src="${foto('parcela-antes')}" alt=""><img src="${foto('parcela-despues')}" alt=""><span class="et et--antes">Antes</span><span class="et et--despues">Después</span></div>`
       : `<img class="unica" src="${foto(a.foto)}" alt="">`,

@@ -8,7 +8,7 @@ En su lugar:
 
 - **Una paleta corta** sacada del logo y del territorio.
 - **Filetes finos** de 1 px para separar, y un **filete doble** (fino arriba y grueso abajo) bajo cada cabecera, como el membrete de un documento.
-- **Numeración en serifa** (01-05, I-IV) para ordenar, en lugar de colores.
+- **Una sola paleta para las cinco áreas**: cada una se reconoce por su foto y su nombre, no por un color propio.
 - **Fotografías enmarcadas como láminas**: paspartú marfil, esquinas rectas y un marco de filete desplazado en la foto destacada.
 - **Curvas de nivel** muy tenues de fondo: el relieve del Montsià como textura.
 
@@ -26,7 +26,8 @@ En su lugar:
 - **Títulos: Playfair Display** con peso 600. Es una serifa clásica que da un tono formal y de confianza. Los títulos van siempre en redonda (sin cursivas) y en un solo color.
 - **Texto: Figtree** (pesos 300 a 900). Sans serif clara y muy legible en el móvil. El texto base mide 17 o 18 px.
 - **Etiquetas de sección** en versalitas espaciadas y en ocre, sin icono.
-- **Números** (áreas, pasos, factores del precio, estaciones) en Playfair Display y en ocre.
+- **Cifras alineadas** (`font-variant-numeric: lining-nums`) en toda la web: Playfair Display trae por defecto cifras elzevirianas, que bajan de la línea y desentonan en fechas y pasos.
+- Solo se numera lo que tiene orden de verdad: los cuatro pasos de «Cómo trabajamos» y los pasos para pedir presupuesto.
 - Las dos fuentes están en la propia web (`src/publico/fonts/`), recortadas a los caracteres del castellano y el catalán, y se cargan con `font-display: swap`.
 
 ## Color
@@ -37,7 +38,7 @@ Tres colores base y neutros de papel y piedra. Están definidos como *tokens* al
 |---|---|---|
 | `--verde` | `#1f4a3d` | Verde Montsià: botones, enlaces activos, filete doble y municipios del mapa |
 | `--tinta` | `#18241f` | Texto principal y títulos |
-| `--ocre` | `#9a7b47` | Bronce de olivo y piedra seca: filetes de detalle y números |
+| `--ocre` | `#9a7b47` | Bronce de olivo y piedra seca: filetes de detalle e iconos |
 | `--ocre-texto` | `#765a2c` | Ocre para texto pequeño (contraste AA sobre marfil) |
 | `--papel` | `#f6f3ec` | Marfil: fondo general |
 | `--papel-2` | `#ede7db` | Piedra: fondo de secciones alternas |
@@ -49,16 +50,20 @@ Tres colores base y neutros de papel y piedra. Están definidos como *tokens* al
 
 El verde de WhatsApp (`#25d366`) solo aparece en el glifo de WhatsApp de los botones, para reconocerlo. El botón en sí es verde Montsià, como el resto de botones principales.
 
-### Las cinco áreas se distinguen por su número
+### Las cinco áreas comparten paleta
 
-Antes cada área tenía su color. Ahora comparten paleta y se distinguen por su **número**: 01 Limpieza de casas y pisos, 02 Jardinería, 03 Desbroce y limpieza de parcelas, 04 Segundas residencias y 05 Mantenimiento periódico. El número aparece en las tarjetas de la portada, en el índice de servicios, en el submenú y en las imágenes para compartir. Es más sobrio y no depende del color, así que también funciona para quien no distingue bien los colores.
+Antes cada área tenía su color. Ahora las cinco comparten la misma paleta y la misma forma, y cada una se reconoce por su **foto y su nombre**. Es más sobrio y no depende del color, así que también funciona para quien no distingue bien los colores.
+
+### Índice de servicios
+
+En la página de servicios, las cinco áreas se abren desde un panel de cinco botones iguales, separados por filetes de 1 px y con una flecha hacia abajo que indica que llevan a su apartado de la misma página. Son cinco columnas en el escritorio, dos en la tableta y una en el móvil.
 
 ## Principios de la Gestalt aplicados
 
 | Principio | Qué dice | Dónde se ve en la web |
 |---|---|---|
 | **Proximidad** | Lo que está cerca se percibe como un grupo | Una escala de espacios (`--e-1` a `--e-8`): dentro de un componente, como mucho 16 px; entre componentes, de 24 a 48 px; entre secciones, de 64 a 120 px. En cada tarjeta de servicio, el icono, el título y el texto van juntos, y la lista de lo que incluye queda separada por un filete. |
-| **Semejanza** | Lo que se parece se percibe como relacionado | Lo que tiene la misma función tiene el mismo aspecto: todos los botones principales son verde Montsià, todas las etiquetas de sección van en versalitas ocre y todos los números en serifa ocre. Las cinco áreas comparten forma y se reconocen por su número. |
+| **Semejanza** | Lo que se parece se percibe como relacionado | Lo que tiene la misma función tiene el mismo aspecto: todos los botones principales son verde Montsià, todas las etiquetas de sección van en versalitas ocre y los cinco accesos del índice de servicios son iguales. Las cinco áreas comparten forma y se reconocen por su foto y su nombre. |
 | **Región común** | Lo que comparte un fondo o un borde forma un grupo | Las tarjetas, los paneles laterales de las guías y la «hoja de encargo» del presupuesto encierran lo que va junto en una superficie marfil con un filete de 1 px. |
 | **Continuidad** | El ojo sigue líneas y alineaciones | Los cuatro pasos de «Cómo trabajamos» están unidos por un filete ocre. Todo se alinea a la misma rejilla y al mismo margen izquierdo; con cuatro servicios, la rejilla pasa a dos columnas para que no quede una tarjeta suelta. |
 | **Cierre** | Completamos mentalmente las formas abiertas | El comparador antes/después muestra media foto de cada momento y se completa al deslizar. El marco de filete desplazado detrás de la foto de segundas residencias se lee como un rectángulo completo aunque la foto lo tape. |
@@ -85,7 +90,7 @@ Las fotos son **imágenes ilustrativas generadas con IA** y lo dicen: cada una l
 
 ## En qué supera a la competencia
 
-- **Aspecto formal y propio:** paleta del territorio, filetes y numeración en serifa, en lugar de los recursos de una plantilla genérica.
+- **Aspecto formal y propio:** paleta del territorio, filetes y fotos enmarcadas como láminas, en lugar de los recursos de una plantilla genérica.
 - **Más servicios, mejor ordenados:** cinco áreas con su propia página y sus preguntas frecuentes, más páginas por pueblo y guías.
 - **Pedir presupuesto es más fácil:** se marcan unas opciones y sale el mensaje de WhatsApp escrito, sin formularios ni datos guardados en ningún servidor.
 - **Contenido útil:** la guía de normativa de incendios cita fuentes oficiales y responde a lo que se preguntan los propietarios.
