@@ -642,11 +642,11 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:800;letter-spacing:0}
 .tarjeta-guia:hover{transform:translateY(-3px);box-shadow:var(--sombra-2)}
 .tarjeta-guia__icono{display:grid;place-items:center;width:52px;height:52px;border-radius:16px;background:var(--area-suave);color:var(--area-osc);margin-bottom:var(--e-4)}
 .tarjeta-guia__icono svg{width:26px;height:26px}
-.tarjeta-guia h3{margin:0 0 var(--e-2);font-size:clamp(1.3rem,1.15rem + .5vw,1.5rem)}
-.tarjeta-guia h3 a{color:var(--tinta);text-decoration:none}
-.tarjeta-guia h3 a::after{content:"";position:absolute;inset:0;border-radius:var(--radio-l)}
+.tarjeta-guia :is(h2,h3){margin:0 0 var(--e-2);font-size:clamp(1.3rem,1.15rem + .5vw,1.5rem)}
+.tarjeta-guia :is(h2,h3) a{color:var(--tinta);text-decoration:none}
+.tarjeta-guia :is(h2,h3) a::after{content:"";position:absolute;inset:0;border-radius:var(--radio-l)}
 .tarjeta-guia:focus-within{outline:3px solid var(--foco);outline-offset:3px}
-.tarjeta-guia h3 a:focus-visible{outline:none}
+.tarjeta-guia :is(h2,h3) a:focus-visible{outline:none}
 .tarjeta-guia p{color:var(--suave);font-size:.97rem;line-height:1.55}
 .tarjeta-guia__mas{display:inline-flex;align-items:center;gap:.4em;margin-top:auto;font-weight:750;font-size:.95rem;color:var(--area-osc)}
 .tarjeta-guia__mas svg{width:1.1em;height:1.1em}
@@ -758,6 +758,8 @@ h4{font-family:var(--f-texto);font-size:1rem;font-weight:800;letter-spacing:0}
 .servicios{display:grid;gap:var(--e-4)}
 @media (min-width:640px){.servicios{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (min-width:1000px){.servicios{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--e-5)}}
+/* Con cuatro servicios, dos filas de dos en vez de tres y uno suelto (continuidad de la rejilla) */
+@media (min-width:1000px){.servicios:has(> :nth-child(4):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}}
 .servicio{
   position:relative;display:flex;flex-direction:column;gap:var(--e-2);scroll-margin-top:calc(var(--alto-cabecera) + 16px);
   background:#fff;border:1px solid var(--linea);border-top:4px solid var(--area);border-radius:var(--radio);padding:var(--e-5);

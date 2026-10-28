@@ -26,7 +26,7 @@ export function vistaContacto() {
       <li class="area-jardin" data-revelar><strong>${ic('i-hoja')} Para el jardín</strong><span>Una vista general y los setos o árboles que haya que podar.</span></li>
       <li class="area-parcela" data-revelar><strong>${ic('i-desbroce')} Para una parcela</strong><span>Una vista general desde una esquina, la zona más complicada y el acceso.</span></li>
     </ul>
-    <p class="consejo-ubicacion">${ic('i-ubicacion')} Y la <strong>ubicación</strong>: en WhatsApp, pulsa el clip y elige «Ubicación», o mándanos la dirección.</p>
+    <p class="consejo-ubicacion">${ic('i-ubicacion')}<span>Y la <strong>ubicación</strong>: en WhatsApp, pulsa el clip y elige «Ubicación», o mándanos la dirección.</span></p>
   </div>
 </section>`;
 }

@@ -12,7 +12,7 @@ export function vistaGuias({ guias }) {
 <section class="seccion" aria-label="Lista de guías">
   <div class="contenedor">
     <div class="guias">
-${guias.map(tarjetaGuia).join('\n')}
+${guias.map(g => tarjetaGuia(g, { titulo: 'h2' })).join('\n')}
     </div>
   </div>
 </section>
@@ -28,7 +28,7 @@ const bloque = b => {
     case 'resumen': return `<ul class="resumen">${b.items.map(([i, h]) => `<li>${ic(i)}<span>${h}</span></li>`).join('')}</ul>`;
     case 'checklist': return `<ul class="checklist">${b.items.map(t => `<li>${ic('i-check')}<span>${enlazar(t)}</span></li>`).join('')}</ul>`;
     case 'calendario': return calendarioIncendios();
-    case 'tabla': return `<div class="tabla-envoltorio"><table class="tabla"><caption class="visualmente-oculto">${b.titulo}</caption><thead><tr>${b.cabecera.map(c => `<th scope="col">${c}</th>`).join('')}</tr></thead><tbody>${b.filas.map(([a, c]) => `<tr><th scope="row">${a}</th><td>${c}</td></tr>`).join('')}</tbody></table></div>`;
+    case 'tabla': return `<section class="tabla-envoltorio" aria-label="${b.titulo}" tabindex="0"><table class="tabla"><caption class="visualmente-oculto">${b.titulo}</caption><thead><tr>${b.cabecera.map(c => `<th scope="col">${c}</th>`).join('')}</tr></thead><tbody>${b.filas.map(([a, c]) => `<tr><th scope="row">${a}</th><td>${c}</td></tr>`).join('')}</tbody></table></section>`;
     default: return '';
   }
 };

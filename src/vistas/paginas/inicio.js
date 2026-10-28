@@ -114,7 +114,7 @@ ${residencia.servicios.map(s => `        <li>${ic('i-check')}<span><strong>${s.n
   <div class="contenedor">
     ${cabeceraSeccion({ etiqueta: 'Guías', titulo: 'Información útil para propietarios', entradilla: 'Lo que conviene saber sobre la normativa de las parcelas y sobre cómo cuidar una casa que pasa meses cerrada.', id: 'guias-titulo' })}
     <div class="guias">
-${guias.map(tarjetaGuia).join('\n')}
+${guias.map(g => tarjetaGuia(g)).join('\n')}
     </div>
   </div>
 </section>

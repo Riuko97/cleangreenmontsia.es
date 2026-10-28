@@ -256,9 +256,9 @@ export const mapa = () => {
 };
 
 // ------------------------------------------------------------ Otras piezas
-export const tarjetaGuia = g => `<article class="tarjeta-guia area-${g.claveArea}" data-revelar>
+export const tarjetaGuia = (g, { titulo = 'h3' } = {}) => `<article class="tarjeta-guia area-${g.claveArea}" data-revelar>
         <span class="tarjeta-guia__icono">${ic(g.icono)}</span>
-        <h3><a href="${url(RUTAS.guia(g.id))}">${g.titulo}</a></h3>
+        <${titulo}><a href="${url(RUTAS.guia(g.id))}">${g.titulo}</a></${titulo}>
         <p>${g.resumen}</p>
         <span class="tarjeta-guia__mas">Leer la guía ${ic('i-flecha')}</span>
       </article>`;
